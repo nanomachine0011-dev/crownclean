@@ -264,9 +264,15 @@ h3 {
 
 h1 {
   font-family: "Poppins", "Inter", Arial, sans-serif;
-  font-size: clamp(3rem, 6.2vw, 6.8rem);
+  font-size: clamp(2.7rem, 5vw, 5.2rem);
   line-height: 0.95;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 4.6vw, 5.15rem);
+  line-height: 0.98;
+  max-width: 780px;
 }
 
 .page-hero h1 {
@@ -288,9 +294,9 @@ h3 {
 
 .lead {
   color: var(--muted);
-  font-size: clamp(1.05rem, 1.7vw, 1.22rem);
-  line-height: 1.75;
-  margin-bottom: 30px;
+  font-size: clamp(1.02rem, 1.35vw, 1.16rem);
+  line-height: 1.68;
+  margin-bottom: 22px;
   max-width: 720px;
 }
 
@@ -374,7 +380,10 @@ h3 {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 70px 24px 104px;
+  min-height: calc(100vh - 132px);
+  padding: 42px 24px 58px;
+  display: flex;
+  align-items: center;
   background:
     radial-gradient(circle at 16% 18%, rgba(22, 104, 232, 0.10), transparent 34%),
     linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
@@ -385,14 +394,14 @@ h3 {
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(500px, 1.08fr);
-  gap: 62px;
+  gap: 54px;
   align-items: center;
   width: 100%;
   min-width: 0;
 }
 
 .hero-copy {
-  padding: 34px 0;
+  padding: 10px 0 0;
   min-width: 0;
 }
 
@@ -402,7 +411,7 @@ h3 {
   gap: 9px;
   min-height: 38px;
   padding: 0 14px;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
   border-radius: var(--radius);
   color: var(--blue-900);
   background: linear-gradient(135deg, #ffffff, var(--blue-100));
@@ -417,14 +426,14 @@ h3 {
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin: 34px 0 18px;
+  margin: 24px 0 14px;
 }
 
 .hero-trust-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin: 0 0 26px;
+  margin: 0 0 18px;
 }
 
 .hero-trust-list span {
@@ -453,7 +462,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
-  padding-top: 22px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
 }
 
@@ -476,7 +485,8 @@ h3 {
 .hero-visual {
   position: relative;
   display: grid;
-  min-height: 700px;
+  min-height: 575px;
+  transform: translateY(-10px);
 }
 
 .hero-image-card {
@@ -484,21 +494,21 @@ h3 {
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  min-height: 660px;
+  min-height: 550px;
 }
 
 .hero-image-card img {
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 42%;
 }
 
 .quote-card {
   position: absolute;
-  right: 26px;
-  bottom: 26px;
+  right: 24px;
+  bottom: 18px;
   width: min(430px, calc(100% - 52px));
-  padding: 26px;
+  padding: 22px;
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(219, 230, 244, 0.82);
@@ -509,7 +519,7 @@ h3 {
 .quote-card h2,
 .quote-card h3 {
   font-family: "Inter", Arial, sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.18rem;
   line-height: 1.2;
   margin-bottom: 8px;
 }
@@ -517,14 +527,14 @@ h3 {
 .quote-card p {
   color: var(--muted);
   font-size: 0.94rem;
-  line-height: 1.55;
-  margin-bottom: 18px;
+  line-height: 1.5;
+  margin-bottom: 14px;
 }
 
 .mini-badge {
   position: absolute;
   left: -18px;
-  top: 44px;
+  top: 28px;
   width: 176px;
   padding: 16px;
   border-radius: var(--radius);
@@ -551,12 +561,12 @@ h3 {
 
 .form {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .field {
   display: grid;
-  gap: 7px;
+  gap: 6px;
 }
 
 .field label {
@@ -569,7 +579,7 @@ h3 {
 .field textarea,
 .field select {
   width: 100%;
-  min-height: 48px;
+  min-height: 46px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 12px 13px;
@@ -580,8 +590,12 @@ h3 {
 }
 
 .field textarea {
-  min-height: 112px;
+  min-height: 96px;
   resize: vertical;
+}
+
+.quote-card .field textarea {
+  min-height: 86px;
 }
 
 .field input:focus,
@@ -597,11 +611,9 @@ h3 {
   line-height: 1.45;
 }
 
-.form-success {
+.form-success,
+.form-error {
   display: none;
-  color: var(--success);
-  background: rgba(15, 138, 100, 0.1);
-  border: 1px solid rgba(15, 138, 100, 0.16);
   padding: 10px 12px;
   border-radius: var(--radius);
   font-size: 0.88rem;
@@ -610,6 +622,21 @@ h3 {
 
 .form-success.visible {
   display: block;
+  color: var(--success);
+  background: rgba(15, 138, 100, 0.1);
+  border: 1px solid rgba(15, 138, 100, 0.16);
+}
+
+.form-error.visible {
+  display: block;
+  color: #a53722;
+  background: rgba(165, 55, 34, 0.1);
+  border: 1px solid rgba(165, 55, 34, 0.18);
+}
+
+.form.is-sending button[type="submit"] {
+  cursor: wait;
+  opacity: 0.78;
 }
 
 .service-card,
@@ -1332,7 +1359,9 @@ h3 {
   }
 
   .hero {
-    padding-top: 54px;
+    min-height: auto;
+    padding-top: 42px;
+    padding-bottom: 58px;
   }
 
   .hero-inner {
@@ -1341,11 +1370,12 @@ h3 {
   }
 
   .hero-visual {
-    min-height: 610px;
+    min-height: 545px;
+    transform: translateY(-6px);
   }
 
   .hero-image-card {
-    min-height: 570px;
+    min-height: 520px;
   }
 
   .quote-card {
@@ -1387,10 +1417,11 @@ h3 {
   .hero-visual {
     min-height: auto;
     display: block;
+    transform: none;
   }
 
   .hero-image-card {
-    min-height: 500px;
+    min-height: 420px;
   }
 
   .quote-card {
@@ -1398,7 +1429,7 @@ h3 {
     right: auto;
     bottom: auto;
     width: 100%;
-    margin-top: -54px;
+    margin-top: -46px;
   }
 }
 
@@ -1456,7 +1487,7 @@ h3 {
   }
 
   .hero-image-card {
-    min-height: 430px;
+    min-height: 380px;
   }
 
   .mini-badge {
@@ -1511,13 +1542,18 @@ h3 {
     overflow-wrap: break-word;
   }
 
+  .hero h1 {
+    font-size: clamp(2rem, 9.7vw, 2.45rem);
+    line-height: 1.04;
+  }
+
   h2 {
     font-size: clamp(1.9rem, 10vw, 2.65rem);
   }
 
   .hero {
-    padding-top: 40px;
-    padding-bottom: 72px;
+    padding-top: 34px;
+    padding-bottom: 58px;
   }
 
   .hero-copy,
@@ -1560,6 +1596,10 @@ h3 {
   .contact-card,
   .contact-form-card {
     padding: 22px;
+  }
+
+  .quote-card {
+    margin-top: -34px;
   }
 
   .image-stat {
