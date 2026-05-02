@@ -2,6 +2,12 @@ const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelector(".nav-links");
 
+// WhatsApp Business auto-replies cannot be configured from this static site.
+// Set them manually in the WhatsApp Business app:
+// Greeting: "Hi [wave emoji] thanks for contacting DepositReady Clean.
+// Are you looking for end of tenancy, Airbnb or regular home cleaning?"
+// Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a quote.
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     const isOpen = body.classList.toggle("menu-open");
