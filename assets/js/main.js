@@ -46,12 +46,66 @@ if ("IntersectionObserver" in window) {
 }
 
 document.querySelectorAll("[data-form]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
     const success = form.querySelector(".form-success");
-    if (success) {
-      success.classList.add("visible");
+    const error = form.querySelector(".form-error");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    if (success) success.classList.remove("visible");
+    if (error) error.classList.remove("visible");
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
     }
-    form.reset();
+
+    const formData = new FormData(form);
+    const fields = Object.fromEntries(formData.entries());
+    const payload = {
+      name: String(fields.name || "").trim(),
+      phone: String(fields.phone || "").trim(),
+      message: String(fields.message || "").trim(),
+      source: form.dataset.source || document.title,
+      fields,
+    };
+
+    if (!payload.name || !payload.phone || !payload.message) {
+      if (error) error.classList.add("visible");
+      return;
+    }
+
+    try {
+      form.classList.add("is-sending");
+      if (submitButton) submitButton.disabled = true;
+
+      console.log("sending request");
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      console.log("response:", res);
+
+      if (res.ok === true) {
+        if (success) success.classList.add("visible");
+        form.reset();
+      } else {
+        if (error) error.classList.add("visible");
+        console.error("contact form error:", data);
+      }
+    } catch (err) {
+      if (error) error.classList.add("visible");
+      console.error("contact form request failed:", err);
+    } finally {
+      form.classList.remove("is-sending");
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 });
