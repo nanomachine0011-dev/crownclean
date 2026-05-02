@@ -1,6 +1,6 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const RECIPIENT_EMAIL = "crownpitch2006@gmail.com";
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "CrownClean <onboarding@resend.dev>";
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "DepositReady Clean <onboarding@resend.dev>";
 
 function clean(value, maxLength = 2000) {
   return String(value || "").trim().slice(0, maxLength);
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
   }
 
   const text = [
-    "New CrownClean Enquiry",
+    "New DepositReady Clean Enquiry",
     "",
     `Name: ${name}`,
     `Phone: ${phone}`,
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     .join("\n");
 
   const html = `
-    <h2>New CrownClean Enquiry</h2>
+    <h2>New DepositReady Clean Enquiry</h2>
     <p><strong>Name:</strong> ${escapeHtml(name)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
     <p><strong>Message:</strong><br>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
@@ -75,12 +75,12 @@ export default async function handler(req, res) {
     headers: {
       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
-      "User-Agent": "crownclean-static-site/1.0",
+      "User-Agent": "depositreadyclean-static-site/1.0",
     },
     body: JSON.stringify({
       from: FROM_EMAIL,
       to: [RECIPIENT_EMAIL],
-      subject: "New CrownClean Enquiry",
+      subject: "New DepositReady Clean Enquiry",
       html,
       text,
     }),

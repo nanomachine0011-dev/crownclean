@@ -564,6 +564,12 @@ h3 {
   gap: 10px;
 }
 
+.form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
 .field {
   display: grid;
   gap: 6px;
@@ -1111,9 +1117,13 @@ h3 {
 
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
   gap: 34px;
   align-items: start;
+}
+
+#quote-form {
+  scroll-margin-top: 150px;
 }
 
 .contact-card,
@@ -1271,6 +1281,7 @@ h3 {
 
 .footer-grid p,
 .footer-grid a,
+.footer-grid span,
 .footer-bottom {
   color: rgba(255, 255, 255, 0.68);
 }
@@ -1497,7 +1508,8 @@ h3 {
 
   .two-col,
   .four-col,
-  .values-grid {
+  .values-grid,
+  .form-grid {
     grid-template-columns: 1fr;
   }
 
