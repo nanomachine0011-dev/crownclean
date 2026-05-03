@@ -1,5 +1,5 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const RECIPIENT_EMAIL = "crownpitch2006@gmail.com";
+const RECIPIENT_EMAIL = "depositreadyclean@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "DepositReady Clean <onboarding@resend.dev>";
 
 function clean(value, maxLength = 2000) {
