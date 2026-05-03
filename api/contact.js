@@ -1,5 +1,4 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const RECIPIENT_EMAIL = "depositreadyclean@gmail.com";
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "DepositReady Clean <onboarding@resend.dev>";
 
 function clean(value, maxLength = 2000) {
@@ -31,6 +30,12 @@ export default async function handler(req, res) {
 
   if (!process.env.RESEND_API_KEY) {
     return res.status(500).json({ error: "Email service is not configured" });
+  }
+
+  const recipientEmail = clean(process.env.CONTACT_TO_EMAIL, 320);
+
+  if (!recipientEmail) {
+    return res.status(500).json({ error: "Email recipient is not configured" });
   }
 
   const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body || {};
@@ -79,7 +84,7 @@ export default async function handler(req, res) {
     },
     body: JSON.stringify({
       from: FROM_EMAIL,
-      to: [RECIPIENT_EMAIL],
+      to: [recipientEmail],
       subject: "New DepositReady Clean Enquiry",
       html,
       text,
