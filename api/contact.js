@@ -1,5 +1,5 @@
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "DepositReady Clean <onboarding@resend.dev>";
+const FROM_EMAIL = "onboarding@resend.dev";
 
 function clean(value, maxLength = 2000) {
   return String(value || "").trim().slice(0, maxLength);
@@ -22,6 +22,10 @@ function formatDetails(fields = {}) {
     .join("\n");
 }
 
+function isEmailAddress(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -42,9 +46,11 @@ export default async function handler(req, res) {
   const fields = body.fields && typeof body.fields === "object" ? body.fields : {};
   const name = clean(body.name || fields.name, 160);
   const phone = clean(body.phone || fields.phone, 80);
+  const email = clean(body.email || fields.email, 320);
   const message = clean(body.message || fields.message, 2000);
   const source = clean(body.source, 240);
   const extraDetails = formatDetails(fields);
+  const replyToEmail = isEmailAddress(email) ? email : "";
 
   if (!name || !phone || !message || !source) {
     return res.status(400).json({ error: "Name, phone, message and source are required" });
@@ -75,6 +81,18 @@ export default async function handler(req, res) {
     }
   `;
 
+  const emailPayload = {
+    from: FROM_EMAIL,
+    to: [recipientEmail],
+    subject: "New DepositReady Clean Enquiry",
+    html,
+    text,
+  };
+
+  if (replyToEmail) {
+    emailPayload.reply_to = replyToEmail;
+  }
+
   const response = await fetch(RESEND_ENDPOINT, {
     method: "POST",
     headers: {
@@ -82,13 +100,7 @@ export default async function handler(req, res) {
       "Content-Type": "application/json",
       "User-Agent": "depositreadyclean-static-site/1.0",
     },
-    body: JSON.stringify({
-      from: FROM_EMAIL,
-      to: [recipientEmail],
-      subject: "New DepositReady Clean Enquiry",
-      html,
-      text,
-    }),
+    body: JSON.stringify(emailPayload),
   });
 
   const data = await response.json().catch(() => ({}));
