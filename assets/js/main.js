@@ -51,6 +51,16 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
 
+function trackQuoteConversion() {
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag('event', 'conversion', {
+    'send_to': 'AW-18139524774/HbBlCK-bvKccEKbdzMlD',
+    'value': 1.0,
+    'currency': 'GBP',
+  });
+}
+
 document.querySelectorAll("[data-form]").forEach((form) => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -100,6 +110,7 @@ document.querySelectorAll("[data-form]").forEach((form) => {
       console.log("response:", res);
 
       if (res.ok === true) {
+        trackQuoteConversion();
         if (success) success.classList.add("visible");
         form.reset();
       } else {
