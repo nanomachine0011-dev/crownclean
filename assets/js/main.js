@@ -51,13 +51,17 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
 
-function trackQuoteConversion() {
+const GOOGLE_ADS_CONVERSION_ID = "AW-18139524774";
+const GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL = "HbBlCK-bvKccEKbdzMlD";
+const GOOGLE_ADS_LEAD_FORM_SEND_TO = `${GOOGLE_ADS_CONVERSION_ID}/${GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL}`;
+
+function trackLeadFormConversion() {
   if (typeof window.gtag !== "function") return;
 
-  window.gtag('event', 'conversion', {
-    'send_to': 'AW-18139524774/HbBlCK-bvKccEKbdzMlD',
-    'value': 1.0,
-    'currency': 'GBP',
+  window.gtag("event", "conversion", {
+    send_to: GOOGLE_ADS_LEAD_FORM_SEND_TO,
+    value: 1.0,
+    currency: "GBP",
   });
 }
 
@@ -96,8 +100,6 @@ document.querySelectorAll("[data-form]").forEach((form) => {
       form.classList.add("is-sending");
       if (submitButton) submitButton.disabled = true;
 
-      console.log("sending request");
-
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -106,14 +108,12 @@ document.querySelectorAll("[data-form]").forEach((form) => {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
-      console.log("response:", res);
-
       if (res.ok === true) {
-        trackQuoteConversion();
+        trackLeadFormConversion();
         if (success) success.classList.add("visible");
         form.reset();
       } else {
+        const data = await res.json().catch(() => ({}));
         if (error) error.classList.add("visible");
         console.error("contact form error:", data);
       }
