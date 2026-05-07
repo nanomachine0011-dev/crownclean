@@ -814,11 +814,10 @@ h3 {
 .hero-proof-bar {
   width: min(100%, var(--max));
   margin: 22px auto 0;
-  padding: 16px 22px;
-  display: grid;
-  grid-template-columns: auto minmax(120px, 1fr) auto minmax(120px, 1fr) auto minmax(160px, 1fr) auto minmax(160px, 1fr);
+  padding: 18px 22px;
+  display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   border: 1px solid rgba(219, 230, 244, 0.92);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.9);
@@ -826,44 +825,12 @@ h3 {
   backdrop-filter: blur(12px);
 }
 
-.hero-proof-bar strong,
 .hero-proof-bar span {
-  display: block;
-}
-
-.hero-proof-bar strong {
   color: var(--blue-900);
-  font-size: 0.96rem;
-}
-
-.hero-proof-bar span {
-  color: #38506e;
-  font-size: 0.86rem;
-  font-weight: 800;
-}
-
-.proof-logo,
-.proof-icon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  color: var(--blue-900);
-  background: var(--blue-100);
-  border-radius: 999px;
+  font-size: clamp(0.95rem, 1.5vw, 1.12rem);
   font-weight: 900;
-}
-
-.google-mark {
-  color: #1a73e8;
-  background: #ffffff;
-  border: 1px solid var(--line);
-}
-
-.facebook-mark {
-  color: #ffffff;
-  background: #1877f2;
-  font-size: 1.3rem;
+  line-height: 1.45;
+  text-align: center;
 }
 
 .mini-badge {
