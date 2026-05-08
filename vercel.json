@@ -1,0 +1,33 @@
+{
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/locations",
+      "destination": "/locations.html"
+    },
+    {
+      "source": "/airbnb-cleaning",
+      "destination": "/airbnb-cleaning.html"
+    },
+    {
+      "source": "/end-of-tenancy-cleaning",
+      "destination": "/end-of-tenancy-cleaning.html"
+    }
+  ]
+}

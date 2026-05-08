@@ -6,7 +6,7 @@ const navLinks = document.querySelector(".nav-links");
 // Set them manually in the WhatsApp Business app:
 // Greeting: "Hi 👋 thanks for contacting DepositReady Clean.
 // Are you looking for end of tenancy, Airbnb or regular home cleaning?"
-// Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a quote.
+// Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a price.
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
@@ -22,10 +22,24 @@ if (menuToggle && navLinks) {
   });
 }
 
-const currentPage = window.location.pathname.split("/").pop() || "index.html";
+function normalizePath(value) {
+  const url = new URL(value, window.location.origin);
+  let path = url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+
+  if (path.length > 1 && path.endsWith("/")) {
+    path = path.slice(0, -1);
+  }
+
+  return path || "/";
+}
+
+const currentPage = normalizePath(window.location.pathname);
+const servicePages = new Set(["/airbnb-cleaning", "/end-of-tenancy-cleaning"]);
 document.querySelectorAll(".nav-links a").forEach((link) => {
-  const href = link.getAttribute("href");
-  if (href === currentPage || (currentPage === "" && href === "index.html")) {
+  const href = normalizePath(link.getAttribute("href"));
+  const isServiceChild = href === "/services" && servicePages.has(currentPage);
+
+  if (href === currentPage || isServiceChild) {
     link.classList.add("active");
     link.setAttribute("aria-current", "page");
   }
