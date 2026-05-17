@@ -194,38 +194,18 @@ button {
   white-space: nowrap;
 }
 
-.nav-contact {
-  display: grid;
-  gap: 4px;
-  justify-items: end;
-  min-width: 190px;
-}
-
-.nav-contact .phone-link {
-  justify-content: end;
-}
-
-.header-email,
 .email-link {
   color: var(--blue-800);
   font-weight: 800;
 }
 
-.header-email {
-  font-size: 0.82rem;
-}
-
 .call-notice {
   display: block;
   max-width: 280px;
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.nav-contact .call-notice {
-  text-align: right;
+  color: var(--blue-900);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.45;
 }
 
 .menu-toggle {
@@ -1279,17 +1259,14 @@ a.hero-price-card:hover {
 
 .phone-cta-wrap {
   display: grid;
-  gap: 7px;
+  gap: 8px;
 }
 
-.phone-cta-wrap .call-notice {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.76rem;
-}
-
-.page-hero-card .phone-cta-wrap .call-notice,
-.contact-item .call-notice {
-  color: var(--muted);
+.hero-actions .phone-cta-wrap .call-notice {
+  color: var(--blue-900);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.45;
 }
 
 .cta-band .btn-secondary {
@@ -1785,15 +1762,8 @@ a.hero-price-card:hover {
   color: var(--white);
 }
 
-.site-footer .call-notice,
 .site-footer .email-link {
   color: rgba(255, 255, 255, 0.68);
-}
-
-.urgency-bar .call-notice {
-  color: rgba(255, 255, 255, 0.76);
-  max-width: none;
-  font-size: 0.74rem;
 }
 
 .footer-bottom {
@@ -1851,10 +1821,6 @@ a.hero-price-card:hover {
   }
 
   .phone-link {
-    display: none;
-  }
-
-  .nav-contact {
     display: none;
   }
 
