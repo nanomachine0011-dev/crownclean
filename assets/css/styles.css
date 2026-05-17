@@ -1129,6 +1129,58 @@ a.hero-price-card:hover {
   gap: 24px;
 }
 
+.google-review-grid {
+  align-items: stretch;
+}
+
+.google-review-card {
+  height: 100%;
+}
+
+.google-review-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.placeholder-stars {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.review-placeholder-note {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.review-source {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(7, 94, 231, 0.16);
+  border-radius: 999px;
+  color: var(--blue-800);
+  background: var(--blue-100);
+  font-size: 0.78rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.google-review-card .testimonial-person {
+  margin-top: auto;
+}
+
+.google-reviews-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
 .stars {
   color: var(--warning);
   font-size: 1rem;
