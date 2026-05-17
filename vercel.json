@@ -1,5 +1,18 @@
 {
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "depositreadyclean.co.uk"
+        }
+      ],
+      "destination": "https://www.depositreadyclean.co.uk/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
@@ -28,6 +41,22 @@
     {
       "source": "/end-of-tenancy-cleaning",
       "destination": "/end-of-tenancy-cleaning.html"
+    },
+    {
+      "source": "/deep-cleaning",
+      "destination": "/deep-cleaning.html"
+    },
+    {
+      "source": "/carpet-cleaning",
+      "destination": "/carpet-cleaning.html"
+    },
+    {
+      "source": "/regular-cleaning",
+      "destination": "/regular-cleaning.html"
+    },
+    {
+      "source": "/end-of-tenancy-cleaning-birmingham",
+      "destination": "/end-of-tenancy-cleaning-birmingham.html"
     }
   ]
 }

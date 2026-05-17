@@ -34,7 +34,14 @@ function normalizePath(value) {
 }
 
 const currentPage = normalizePath(window.location.pathname);
-const servicePages = new Set(["/airbnb-cleaning", "/end-of-tenancy-cleaning"]);
+const servicePages = new Set([
+  "/airbnb-cleaning",
+  "/carpet-cleaning",
+  "/deep-cleaning",
+  "/end-of-tenancy-cleaning",
+  "/end-of-tenancy-cleaning-birmingham",
+  "/regular-cleaning",
+]);
 document.querySelectorAll(".nav-links a").forEach((link) => {
   const href = normalizePath(link.getAttribute("href"));
   const isServiceChild = href === "/services" && servicePages.has(currentPage);
