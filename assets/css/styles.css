@@ -1144,17 +1144,9 @@ a.hero-price-card:hover {
   gap: 16px;
 }
 
-.placeholder-stars {
+.google-review-card .stars {
   display: block;
   margin-bottom: 6px;
-}
-
-.review-placeholder-note {
-  display: block;
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 800;
-  line-height: 1.35;
 }
 
 .review-source {
