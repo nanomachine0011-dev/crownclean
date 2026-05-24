@@ -2055,6 +2055,11 @@ a.hero-price-card:hover {
     width: 100%;
   }
 
+  .hero-actions .phone-cta-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .hero-cro .hero-actions .btn,
   .hero-cro .hero-actions .btn-secondary {
     width: 100%;
