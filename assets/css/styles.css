@@ -1130,7 +1130,10 @@ a.hero-price-card:hover {
 }
 
 .google-review-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
+  max-width: 980px;
+  margin: 0 auto;
 }
 
 .google-review-card {
@@ -1171,6 +1174,12 @@ a.hero-price-card:hover {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+}
+
+.reviews-trust-text {
+  margin-top: 12px;
+  color: var(--blue-900);
+  font-weight: 900;
 }
 
 .stars {
@@ -2074,6 +2083,10 @@ a.hero-price-card:hover {
   }
 
   .three-col {
+    grid-template-columns: 1fr;
+  }
+
+  .google-review-grid {
     grid-template-columns: 1fr;
   }
 
