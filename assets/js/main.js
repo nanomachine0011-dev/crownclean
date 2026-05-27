@@ -72,6 +72,113 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
 
+document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
+  const track = carousel.querySelector("[data-review-track]");
+  const cards = Array.from(carousel.querySelectorAll(".google-review-card"));
+  const previousButton = carousel.querySelector("[data-review-prev]");
+  const nextButton = carousel.querySelector("[data-review-next]");
+  const autoSlideInterval = 4500;
+  const manualPauseDuration = autoSlideInterval * 2;
+  let currentIndex = 0;
+  let autoSlideTimer = 0;
+  let manualPauseTimer = 0;
+  let isPointerPaused = false;
+  let isFocusPaused = false;
+  let isManualPaused = false;
+
+  if (!track || cards.length === 0 || !previousButton || !nextButton) return;
+
+  function getVisibleCount() {
+    const value = Number.parseInt(
+      getComputedStyle(carousel).getPropertyValue("--reviews-visible"),
+      10
+    );
+
+    return Number.isNaN(value) ? 1 : value;
+  }
+
+  function getSlideDistance() {
+    const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
+    return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  function updateCarousel() {
+    const maxIndex = Math.max(0, cards.length - getVisibleCount());
+    currentIndex = Math.min(Math.max(currentIndex, 0), maxIndex);
+    track.style.transform = `translateX(-${currentIndex * getSlideDistance()}px)`;
+    previousButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === maxIndex;
+  }
+
+  function stopAutoSlide() {
+    window.clearInterval(autoSlideTimer);
+    autoSlideTimer = 0;
+  }
+
+  function startAutoSlide() {
+    const maxIndex = Math.max(0, cards.length - getVisibleCount());
+
+    stopAutoSlide();
+    if (maxIndex === 0 || isPointerPaused || isFocusPaused || isManualPaused) return;
+
+    autoSlideTimer = window.setInterval(() => {
+      const nextIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+      currentIndex = nextIndex;
+      updateCarousel();
+    }, autoSlideInterval);
+  }
+
+  function pauseAfterManualMove() {
+    isManualPaused = true;
+    stopAutoSlide();
+    window.clearTimeout(manualPauseTimer);
+    manualPauseTimer = window.setTimeout(() => {
+      isManualPaused = false;
+      startAutoSlide();
+    }, manualPauseDuration);
+  }
+
+  previousButton.addEventListener("click", () => {
+    currentIndex -= 1;
+    updateCarousel();
+    pauseAfterManualMove();
+  });
+
+  nextButton.addEventListener("click", () => {
+    currentIndex += 1;
+    updateCarousel();
+    pauseAfterManualMove();
+  });
+
+  carousel.addEventListener("mouseenter", () => {
+    isPointerPaused = true;
+    stopAutoSlide();
+  });
+
+  carousel.addEventListener("mouseleave", () => {
+    isPointerPaused = false;
+    startAutoSlide();
+  });
+
+  carousel.addEventListener("focusin", () => {
+    isFocusPaused = true;
+    stopAutoSlide();
+  });
+
+  carousel.addEventListener("focusout", () => {
+    isFocusPaused = false;
+    startAutoSlide();
+  });
+
+  window.addEventListener("resize", () => {
+    updateCarousel();
+    startAutoSlide();
+  });
+
+  updateCarousel();
+  startAutoSlide();
+});
+
 const GOOGLE_ADS_CONVERSION_ID = "AW-18139524774";
 const GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL = "HbBlCK-bvKccEKbdzMlD";
 const GOOGLE_ADS_LEAD_FORM_SEND_TO = `${GOOGLE_ADS_CONVERSION_ID}/${GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL}`;
