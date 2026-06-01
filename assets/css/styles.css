@@ -1160,6 +1160,12 @@ a.hero-price-card:hover {
   gap: 16px;
 }
 
+.google-review-card.featured-review-card {
+  border-color: rgba(7, 94, 231, 0.22);
+  background: linear-gradient(180deg, var(--white) 0%, #f8fbff 100%);
+  box-shadow: 0 18px 42px rgba(15, 32, 56, 0.11);
+}
+
 .google-review-top {
   display: flex;
   align-items: flex-start;
