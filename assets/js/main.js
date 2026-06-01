@@ -74,7 +74,20 @@ if ("IntersectionObserver" in window) {
 
 document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   const track = carousel.querySelector("[data-review-track]");
-  const cards = Array.from(carousel.querySelectorAll(".google-review-card"));
+  const seenReviews = new Set();
+  const cards = Array.from(carousel.querySelectorAll(".google-review-card")).filter((card) => {
+    const reviewer = card.querySelector("strong")?.textContent.trim().toLowerCase() || "";
+    const reviewText = card.querySelector("p")?.textContent.trim().replace(/\s+/g, " ").toLowerCase() || "";
+    const reviewKey = `${reviewer}|${reviewText}`;
+
+    if (seenReviews.has(reviewKey)) {
+      card.remove();
+      return false;
+    }
+
+    seenReviews.add(reviewKey);
+    return true;
+  });
   const previousButton = carousel.querySelector("[data-review-prev]");
   const nextButton = carousel.querySelector("[data-review-next]");
   const autoSlideInterval = 4500;
@@ -97,17 +110,28 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     return Number.isNaN(value) ? 1 : value;
   }
 
+  function getMaxStartIndex() {
+    const visibleCount = getVisibleCount();
+    return Math.max(0, Math.floor((cards.length - 1) / visibleCount) * visibleCount);
+  }
+
+  function getGroupStart(index) {
+    const visibleCount = getVisibleCount();
+    return Math.min(Math.floor(Math.max(index, 0) / visibleCount) * visibleCount, getMaxStartIndex());
+  }
+
   function getSlideDistance() {
     const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
     return cards[0].getBoundingClientRect().width + gap;
   }
 
-  function updateCarousel() {
-    const maxIndex = Math.max(0, cards.length - getVisibleCount());
+  function updateCarousel(snapToGroup = false) {
+    const maxIndex = getMaxStartIndex();
     currentIndex = Math.min(Math.max(currentIndex, 0), maxIndex);
+    if (snapToGroup) currentIndex = getGroupStart(currentIndex);
     track.style.transform = `translateX(-${currentIndex * getSlideDistance()}px)`;
-    previousButton.disabled = currentIndex === 0;
-    nextButton.disabled = currentIndex === maxIndex;
+    previousButton.disabled = maxIndex === 0;
+    nextButton.disabled = maxIndex === 0;
   }
 
   function stopAutoSlide() {
@@ -116,14 +140,13 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   }
 
   function startAutoSlide() {
-    const maxIndex = Math.max(0, cards.length - getVisibleCount());
+    const maxIndex = getMaxStartIndex();
 
     stopAutoSlide();
     if (maxIndex === 0 || isPointerPaused || isFocusPaused || isManualPaused) return;
 
     autoSlideTimer = window.setInterval(() => {
-      const nextIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
-      currentIndex = nextIndex;
+      currentIndex = currentIndex >= maxIndex ? 0 : Math.min(getGroupStart(currentIndex) + getVisibleCount(), maxIndex);
       updateCarousel();
     }, autoSlideInterval);
   }
@@ -139,13 +162,15 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   }
 
   previousButton.addEventListener("click", () => {
-    currentIndex -= 1;
+    const maxIndex = getMaxStartIndex();
+    currentIndex = currentIndex <= 0 ? maxIndex : Math.max(getGroupStart(currentIndex) - getVisibleCount(), 0);
     updateCarousel();
     pauseAfterManualMove();
   });
 
   nextButton.addEventListener("click", () => {
-    currentIndex += 1;
+    const maxIndex = getMaxStartIndex();
+    currentIndex = currentIndex >= maxIndex ? 0 : Math.min(getGroupStart(currentIndex) + getVisibleCount(), maxIndex);
     updateCarousel();
     pauseAfterManualMove();
   });
@@ -171,7 +196,7 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   });
 
   window.addEventListener("resize", () => {
-    updateCarousel();
+    updateCarousel(true);
     startAutoSlide();
   });
 
