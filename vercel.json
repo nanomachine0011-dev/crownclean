@@ -23,6 +23,10 @@
       "destination": "/services.html"
     },
     {
+      "source": "/commercial-cleaning",
+      "destination": "/commercial-cleaning.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact.html"
     },

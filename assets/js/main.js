@@ -2,6 +2,39 @@ const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelector(".nav-links");
 
+if (window.location.protocol === "file:") {
+  const routeMap = new Map([
+    ["/", "index.html"],
+    ["/services", "services.html"],
+    ["/commercial-cleaning", "commercial-cleaning.html"],
+    ["/contact", "contact.html"],
+    ["/about", "about.html"],
+    ["/locations", "locations.html"],
+    ["/airbnb-cleaning", "airbnb-cleaning.html"],
+    ["/end-of-tenancy-cleaning", "end-of-tenancy-cleaning.html"],
+    ["/deep-cleaning", "deep-cleaning.html"],
+    ["/carpet-cleaning", "carpet-cleaning.html"],
+    ["/regular-cleaning", "regular-cleaning.html"],
+    ["/end-of-tenancy-cleaning-birmingham", "end-of-tenancy-cleaning-birmingham.html"],
+    ["/privacy", "privacy/index.html"],
+  ]);
+  const siteRoot = new URL(window.location.href);
+  siteRoot.pathname = siteRoot.pathname.replace(/(?:privacy\/)?[^/]*$/, "");
+  siteRoot.search = "";
+  siteRoot.hash = "";
+
+  document.querySelectorAll('a[href^="/"]').forEach((link) => {
+    const target = new URL(link.getAttribute("href"), "https://www.depositreadyclean.co.uk");
+    const localPath = routeMap.get(target.pathname);
+
+    if (localPath) {
+      const localUrl = new URL(localPath, siteRoot.href);
+      localUrl.hash = target.hash;
+      link.setAttribute("href", localUrl.href);
+    }
+  });
+}
+
 // WhatsApp Business auto-replies cannot be configured from this static site.
 // Set them manually in the WhatsApp Business app:
 // Greeting: "Hi 👋 thanks for contacting DepositReady Clean.
@@ -23,7 +56,7 @@ if (menuToggle && navLinks) {
 }
 
 function normalizePath(value) {
-  const url = new URL(value, window.location.origin);
+  const url = new URL(value, window.location.href);
   let path = url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
 
   if (path.length > 1 && path.endsWith("/")) {
@@ -43,10 +76,13 @@ const servicePages = new Set([
   "/regular-cleaning",
 ]);
 document.querySelectorAll(".nav-links a").forEach((link) => {
-  const href = normalizePath(link.getAttribute("href"));
-  const isServiceChild = href === "/services" && servicePages.has(currentPage);
+  const url = new URL(link.getAttribute("href"), window.location.href);
+  const href = normalizePath(url.pathname);
+  const hasHash = Boolean(url.hash);
+  const hashMatches = hasHash && href === currentPage && url.hash === window.location.hash;
+  const isServiceChild = !hasHash && href === "/services" && servicePages.has(currentPage);
 
-  if (href === currentPage || isServiceChild) {
+  if ((!hasHash && href === currentPage) || hashMatches || isServiceChild) {
     link.classList.add("active");
     link.setAttribute("aria-current", "page");
   }
@@ -90,6 +126,7 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   });
   const previousButton = carousel.querySelector("[data-review-prev]");
   const nextButton = carousel.querySelector("[data-review-next]");
+  const dotsContainer = carousel.querySelector("[data-review-dots]");
   const autoSlideInterval = 4500;
   const manualPauseDuration = autoSlideInterval * 2;
   let currentIndex = 0;
@@ -98,6 +135,9 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   let isPointerPaused = false;
   let isFocusPaused = false;
   let isManualPaused = false;
+  let dotButtons = [];
+  let touchStartX = 0;
+  let touchStartY = 0;
 
   if (!track || cards.length === 0 || !previousButton || !nextButton) return;
 
@@ -120,9 +160,32 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     return Math.min(Math.floor(Math.max(index, 0) / visibleCount) * visibleCount, getMaxStartIndex());
   }
 
+  function getPageStarts() {
+    const visibleCount = getVisibleCount();
+    const maxIndex = getMaxStartIndex();
+    const starts = [];
+
+    for (let index = 0; index <= maxIndex; index += visibleCount) {
+      starts.push(index);
+    }
+
+    return starts;
+  }
+
   function getSlideDistance() {
     const gap = Number.parseFloat(getComputedStyle(track).columnGap) || 0;
     return cards[0].getBoundingClientRect().width + gap;
+  }
+
+  function updateDots() {
+    if (!dotsContainer) return;
+
+    const activeIndex = getGroupStart(currentIndex);
+    dotButtons.forEach((button) => {
+      const isActive = Number.parseInt(button.dataset.reviewIndex, 10) === activeIndex;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-current", isActive ? "true" : "false");
+    });
   }
 
   function updateCarousel(snapToGroup = false) {
@@ -132,6 +195,29 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     track.style.transform = `translateX(-${currentIndex * getSlideDistance()}px)`;
     previousButton.disabled = maxIndex === 0;
     nextButton.disabled = maxIndex === 0;
+    updateDots();
+  }
+
+  function renderDots() {
+    if (!dotsContainer) return;
+
+    dotsContainer.innerHTML = "";
+    dotButtons = getPageStarts().map((startIndex, dotIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "review-slider-dot";
+      button.dataset.reviewIndex = String(startIndex);
+      button.setAttribute("aria-label", `Show review slide ${dotIndex + 1}`);
+      button.addEventListener("click", () => {
+        currentIndex = startIndex;
+        updateCarousel();
+        pauseAfterManualMove();
+      });
+      dotsContainer.appendChild(button);
+      return button;
+    });
+
+    updateDots();
   }
 
   function stopAutoSlide() {
@@ -161,19 +247,49 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     }, manualPauseDuration);
   }
 
-  previousButton.addEventListener("click", () => {
+  function showPreviousReview() {
     const maxIndex = getMaxStartIndex();
     currentIndex = currentIndex <= 0 ? maxIndex : Math.max(getGroupStart(currentIndex) - getVisibleCount(), 0);
     updateCarousel();
     pauseAfterManualMove();
-  });
+  }
 
-  nextButton.addEventListener("click", () => {
+  function showNextReview() {
     const maxIndex = getMaxStartIndex();
     currentIndex = currentIndex >= maxIndex ? 0 : Math.min(getGroupStart(currentIndex) + getVisibleCount(), maxIndex);
     updateCarousel();
     pauseAfterManualMove();
-  });
+  }
+
+  previousButton.addEventListener("click", showPreviousReview);
+  nextButton.addEventListener("click", showNextReview);
+
+  carousel.addEventListener(
+    "touchstart",
+    (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    },
+    { passive: true }
+  );
+
+  carousel.addEventListener(
+    "touchend",
+    (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+      if (deltaX > 0) {
+        showPreviousReview();
+      } else {
+        showNextReview();
+      }
+    },
+    { passive: true }
+  );
 
   carousel.addEventListener("mouseenter", () => {
     isPointerPaused = true;
@@ -197,9 +313,11 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
 
   window.addEventListener("resize", () => {
     updateCarousel(true);
+    renderDots();
     startAutoSlide();
   });
 
+  renderDots();
   updateCarousel();
   startAutoSlide();
 });

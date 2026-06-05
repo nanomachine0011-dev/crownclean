@@ -159,6 +159,19 @@ button {
   background: var(--blue-100);
 }
 
+.nav-links a.nav-book-cta {
+  margin-left: 4px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+  box-shadow: 0 12px 26px rgba(11, 94, 215, 0.2);
+}
+
+.nav-links a.nav-book-cta:hover,
+.nav-links a.nav-book-cta.active {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--blue-800), var(--blue-900));
+}
+
 .nav-cta {
   display: flex;
   align-items: center;
@@ -339,6 +352,31 @@ h3 {
   margin-bottom: 0;
 }
 
+.home-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-main > section {
+  order: 4;
+}
+
+.home-main > .hero-cro {
+  order: 0;
+}
+
+.home-main > .home-reviews-section {
+  order: 1;
+}
+
+.home-main > .home-services-section {
+  order: 2;
+}
+
+.home-main > .why-choose-section {
+  order: 3;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -463,14 +501,17 @@ h3 {
 }
 
 .hero-cro {
+  --hero-image: url("/images/home-hero.png");
   min-height: calc(100vh - 132px);
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  padding: 28px 24px 26px;
+  padding: 36px 24px 44px;
+  /* Homepage hero image: replace /images/home-hero.png with the final modern apartment/home cleaning image. */
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.91) 38%, rgba(255, 255, 255, 0.55) 66%, rgba(255, 255, 255, 0.86) 100%),
-    url("https://images.pexels.com/photos/6195111/pexels-photo-6195111.jpeg?auto=compress&cs=tinysrgb&w=1800") center 46% / cover;
+    linear-gradient(90deg, rgba(3, 12, 27, 0.78) 0%, rgba(4, 31, 79, 0.64) 46%, rgba(4, 31, 79, 0.40) 100%),
+    var(--hero-image) center center / cover no-repeat,
+    linear-gradient(180deg, #071b36 0%, #0b1f3a 100%);
 }
 
 .hero-cro::before {
@@ -478,7 +519,9 @@ h3 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(235, 246, 255, 0.58) 0%, rgba(255, 255, 255, 0.12) 52%, rgba(255, 255, 255, 0.88) 100%);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.02) 48%, rgba(0, 0, 0, 0.18) 100%),
+    radial-gradient(circle at 76% 16%, rgba(22, 135, 242, 0.16), transparent 34%);
 }
 
 .hero-cro > * {
@@ -488,7 +531,7 @@ h3 {
 
 .hero-cro .hero-inner {
   grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
-  gap: clamp(28px, 4vw, 58px);
+  gap: clamp(22px, 3vw, 42px);
   align-items: center;
 }
 
@@ -498,18 +541,18 @@ h3 {
 }
 
 .hero-cro .hero-eyebrow {
-  color: var(--blue-700);
-  background: rgba(255, 255, 255, 0.84);
-  border-color: rgba(7, 94, 231, 0.16);
-  box-shadow: 0 10px 28px rgba(4, 31, 79, 0.10);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
   text-transform: uppercase;
 }
 
 .hero-cro h1 {
   max-width: 730px;
-  margin-bottom: 16px;
-  color: var(--blue-900);
-  font-size: clamp(2.8rem, 4.55vw, 4.45rem);
+  margin-bottom: 12px;
+  color: var(--white);
+  font-size: clamp(2.3rem, 4.2vw, 4.05rem);
   line-height: 1;
 }
 
@@ -519,24 +562,30 @@ h3 {
 
 .hero-cro .lead {
   max-width: 620px;
-  color: #244262;
+  color: rgba(255, 255, 255, 0.84);
   font-size: clamp(1rem, 1.22vw, 1.14rem);
-  line-height: 1.55;
-  margin-bottom: 14px;
+  line-height: 1.48;
+  margin-bottom: 10px;
 }
 
 .hero-cro .hero-actions {
-  margin: 18px 0 14px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  margin: 14px 0 8px;
 }
 
 .hero-cro .hero-actions .btn {
-  min-width: min(100%, 270px);
-  min-height: 60px;
+  min-width: 270px;
+  min-height: 54px;
   border-radius: 8px;
 }
 
 .hero-cro .hero-actions .btn-secondary {
-  min-width: min(100%, 300px);
+  min-width: 300px;
+}
+
+.hero-cro .hero-actions .phone-cta-wrap {
+  flex: 0 0 auto;
 }
 
 .hero-trust-list {
@@ -571,128 +620,27 @@ h3 {
 .hero-trust-icons {
   display: grid;
   grid-template-columns: repeat(4, minmax(130px, 1fr));
-  gap: 12px;
+  gap: 8px;
   max-width: 680px;
-  margin: 0 0 16px;
+  margin: 0;
 }
 
 .hero-trust-icons span {
   justify-content: flex-start;
-  min-height: 54px;
-  padding: 10px 4px 10px 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  color: var(--blue-900);
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.11);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  color: var(--white);
   line-height: 1.25;
   font-size: 0.86rem;
 }
 
 .hero-trust-icons svg {
-  width: 28px;
-  height: 28px;
-  color: var(--blue-700);
-}
-
-.hero-pricing {
-  width: min(100%, 720px);
-  padding: 18px;
-  border: 1px solid rgba(219, 230, 244, 0.9);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 24px 60px rgba(4, 31, 79, 0.12);
-  backdrop-filter: blur(14px);
-}
-
-.hero-pricing > p {
-  margin: 0 0 14px;
-  color: var(--blue-700);
-  font-size: 0.86rem;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.hero-pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.hero-price-card {
-  min-width: 0;
-  padding: 10px 14px 4px;
-  text-align: center;
-  border-right: 1px solid var(--line);
-  color: inherit;
-  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-}
-
-.hero-price-card:last-child {
-  border-right: 0;
-}
-
-a.hero-price-card:hover {
-  position: relative;
-  z-index: 1;
-  background: var(--white);
-  transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(4, 31, 79, 0.14);
-}
-
-.hero-price-card h2 {
-  margin: 6px 0 10px;
-  color: var(--blue-900);
-  font-family: "Inter", Arial, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.25;
-}
-
-.hero-price-card small {
-  display: block;
-  color: var(--muted);
-  font-weight: 800;
-}
-
-.hero-price-card strong {
-  display: block;
-  margin-top: 2px;
-  color: var(--blue-900);
-  font-size: clamp(1.6rem, 2.8vw, 2.15rem);
-  line-height: 1;
-}
-
-.price-icon {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  color: var(--blue-700);
-  font-size: 1.35rem;
-  font-weight: 900;
-}
-
-.price-icon.green {
-  color: #06a957;
-}
-
-.price-icon.coral {
-  color: #ff5555;
-}
-
-.price-icon.blue {
-  color: var(--blue-700);
-}
-
-.price-icon.yellow {
-  color: #d99a00;
-}
-
-.price-disclaimer {
-  display: block;
-  margin-top: 14px;
-  color: #38506e;
-  text-align: center;
-  font-size: 0.86rem;
-  font-weight: 600;
+  width: 23px;
+  height: 23px;
+  color: #8fd2ff;
 }
 
 .hero-proof {
@@ -777,7 +725,7 @@ a.hero-price-card:hover {
 
 .hero-quote-card {
   width: 100%;
-  padding: clamp(22px, 2.6vw, 32px);
+  padding: clamp(16px, 1.9vw, 22px);
   border: 1px solid rgba(219, 230, 244, 0.92);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.96);
@@ -786,22 +734,22 @@ a.hero-price-card:hover {
 }
 
 .hero-quote-card h2 {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   color: var(--blue-900);
   font-family: "Inter", Arial, sans-serif;
-  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  font-size: clamp(1.32rem, 1.8vw, 1.58rem);
   line-height: 1.15;
 }
 
 .hero-quote-card > p {
   color: var(--ink);
-  font-size: 1rem;
-  line-height: 1.55;
-  margin-bottom: 20px;
+  font-size: 0.94rem;
+  line-height: 1.45;
+  margin-bottom: 12px;
 }
 
 .hero-quote-card .form {
-  gap: 10px;
+  gap: 8px;
 }
 
 .hero-quote-card .field label {
@@ -811,20 +759,20 @@ a.hero-price-card:hover {
 .hero-quote-card .field input,
 .hero-quote-card .field textarea,
 .hero-quote-card .field select {
-  min-height: 46px;
+  min-height: 42px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.96);
 }
 
 .hero-quote-card .field textarea {
-  min-height: 88px;
+  min-height: 68px;
 }
 
 .hero-quote-card button[type="submit"] {
   width: 100%;
-  min-height: 56px;
+  min-height: 46px;
   border-radius: 8px;
-  font-size: 1.03rem;
+  font-size: 0.98rem;
 }
 
 .fast-reply-note {
@@ -995,6 +943,54 @@ a.hero-price-card:hover {
 
 .service-card {
   padding: 28px;
+}
+
+.home-services-section {
+  padding-top: 82px;
+}
+
+.five-card-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.service-quote-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.service-quote-card .icon-box,
+.service-quote-card h3,
+.service-quote-card p {
+  margin-bottom: 0;
+}
+
+.service-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 42px;
+  margin-top: auto;
+  padding: 0 16px;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+  border-radius: var(--radius);
+  font-weight: 900;
+  box-shadow: 0 12px 26px rgba(7, 94, 231, 0.20);
+}
+
+.service-card-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(7, 94, 231, 0.28);
+}
+
+.why-choose-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .icon-box {
@@ -1208,6 +1204,7 @@ a.hero-price-card:hover {
 
 .google-reviews-controls {
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 12px;
   margin-top: 14px;
@@ -1242,6 +1239,35 @@ a.hero-price-card:hover {
   height: 21px;
 }
 
+.review-slider-dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 0 6px;
+}
+
+.review-slider-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(7, 94, 231, 0.22);
+  cursor: pointer;
+  transition: width 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.review-slider-dot.is-active {
+  width: 24px;
+  background: var(--blue-700);
+}
+
+.review-slider-dot:hover {
+  transform: translateY(-1px);
+  background: var(--blue-600);
+}
+
 .google-reviews-action {
   display: flex;
   justify-content: center;
@@ -1252,6 +1278,62 @@ a.hero-price-card:hover {
   margin-top: 12px;
   color: var(--blue-900);
   font-weight: 900;
+}
+
+.home-reviews-section {
+  padding: 18px 24px 28px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--blue-050) 100%);
+}
+
+.home-reviews-section .section-heading {
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.home-reviews-section .section-kicker {
+  margin-bottom: 6px;
+}
+
+.home-reviews-section h2 {
+  margin-bottom: 6px;
+  font-size: clamp(1.62rem, 2.25vw, 2.25rem);
+}
+
+.home-reviews-section .section-heading p {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.home-reviews-section .google-reviews-carousel {
+  --review-gap: 16px;
+  max-width: 1080px;
+}
+
+.home-reviews-section .google-review-card {
+  flex-basis: calc((100% - 32px) / 3);
+  min-height: 198px;
+  padding: 14px;
+  gap: 10px;
+}
+
+.home-reviews-section .google-review-card > p {
+  line-height: 1.5;
+  max-height: calc(1.5em * 3);
+  -webkit-line-clamp: 3;
+}
+
+.home-reviews-section .google-review-card .testimonial-person {
+  padding-top: 10px;
+}
+
+.home-reviews-section .review-source {
+  min-height: 26px;
+  padding: 0 9px;
+  font-size: 0.72rem;
+}
+
+.home-reviews-section .google-reviews-controls {
+  margin-top: 8px;
 }
 
 .stars {
@@ -1394,6 +1476,10 @@ a.hero-price-card:hover {
   line-height: 1.45;
 }
 
+.hero-cro .hero-actions .phone-cta-wrap .call-notice {
+  color: rgba(255, 255, 255, 0.78);
+}
+
 .cta-band .btn-secondary {
   color: var(--blue-900);
   box-shadow: none;
@@ -1453,6 +1539,66 @@ a.hero-price-card:hover {
     linear-gradient(180deg, #ffffff 0%, var(--blue-050) 100%);
 }
 
+.page-hero-photo {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.88) 52%, rgba(255, 255, 255, 0.68) 100%),
+    url("https://images.pexels.com/photos/4107284/pexels-photo-4107284.jpeg?auto=compress&cs=tinysrgb&w=1800") center/cover;
+}
+
+.commercial-page-hero {
+  --hero-image: url("/images/commercial-hero.png");
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - 132px);
+  padding: 56px 24px;
+  /* Commercial hero image: replace /images/commercial-hero.png with the final dark premium commercial lobby/hallway image. */
+  background:
+    linear-gradient(90deg, rgba(3, 12, 27, 0.90) 0%, rgba(4, 31, 79, 0.78) 48%, rgba(4, 31, 79, 0.54) 100%),
+    var(--hero-image) center center / cover no-repeat,
+    linear-gradient(180deg, #071b36 0%, #0b1f3a 100%);
+}
+
+.commercial-page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.30)),
+    radial-gradient(circle at 78% 20%, rgba(22, 135, 242, 0.18), transparent 36%);
+}
+
+.commercial-page-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.commercial-page-hero .page-hero-inner {
+  grid-template-columns: minmax(0, 0.96fr) minmax(430px, 0.82fr);
+  align-items: center;
+}
+
+.commercial-page-hero .breadcrumb,
+.commercial-page-hero .breadcrumb a,
+.commercial-page-hero .section-kicker,
+.commercial-page-hero h1 {
+  color: var(--white);
+}
+
+.commercial-page-hero .section-kicker {
+  color: #8fd2ff;
+}
+
+.commercial-page-hero .lead {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.commercial-quote-card {
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
+}
+
 .page-hero-inner {
   max-width: var(--max);
   margin: 0 auto;
@@ -1485,6 +1631,19 @@ a.hero-price-card:hover {
   color: var(--muted);
   line-height: 1.7;
   margin-bottom: 20px;
+}
+
+.hero-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  max-width: 520px;
+  margin-top: 28px;
+  align-items: stretch;
+}
+
+.hero-card-actions .btn {
+  flex: 1 1 150px;
 }
 
 .split-feature {
@@ -1532,6 +1691,48 @@ a.hero-price-card:hover {
 .service-price {
   color: var(--blue-900);
   font-weight: 900;
+}
+
+.results-gallery {
+  display: grid;
+  grid-template-columns: 0.94fr 1.06fr;
+  gap: 16px;
+  min-height: 420px;
+}
+
+.results-gallery img {
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.results-gallery img:first-child {
+  margin-top: 44px;
+}
+
+.commercial-cleaning-section {
+  background:
+    linear-gradient(rgba(4, 31, 79, 0.74), rgba(4, 31, 79, 0.74)),
+    url("https://images.pexels.com/photos/4107108/pexels-photo-4107108.jpeg?auto=compress&cs=tinysrgb&w=1800") center/cover;
+}
+
+.commercial-cleaning-panel {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-lg);
+}
+
+.facilities-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 28px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .service-link-grid {
@@ -1706,6 +1907,12 @@ a.hero-price-card:hover {
 }
 
 #price-form {
+  scroll-margin-top: 150px;
+}
+
+#quote-form,
+#services,
+#commercial-cleaning {
   scroll-margin-top: 150px;
 }
 
@@ -1956,6 +2163,10 @@ a.hero-price-card:hover {
     grid-template-columns: 1fr;
   }
 
+  .commercial-page-hero .page-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
   .hero {
     min-height: auto;
     padding-top: 42px;
@@ -1973,17 +2184,6 @@ a.hero-price-card:hover {
 
   .hero-trust-icons {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hero-pricing-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    background: var(--line);
-  }
-
-  .hero-price-card {
-    background: rgba(255, 255, 255, 0.96);
-    border-right: 0;
   }
 
   .hero-proof-bar {
@@ -2009,6 +2209,11 @@ a.hero-price-card:hover {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .five-card-grid,
+  .why-choose-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .trust-intro {
     grid-column: 1 / -1;
   }
@@ -2024,6 +2229,21 @@ a.hero-price-card:hover {
 
   .google-review-card {
     flex-basis: calc((100% - var(--review-gap)) / 2);
+  }
+
+  .results-gallery {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .results-gallery img,
+  .results-gallery img:first-child {
+    min-height: 260px;
+    margin-top: 0;
+  }
+
+  .facilities-list {
+    grid-template-columns: 1fr;
   }
 
   .service-link-grid {
@@ -2046,8 +2266,9 @@ a.hero-price-card:hover {
 
   .hero-cro {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 58%, rgba(246, 250, 255, 0.98) 100%),
-      url("https://images.pexels.com/photos/6195111/pexels-photo-6195111.jpeg?auto=compress&cs=tinysrgb&w=1400") center top / cover;
+      linear-gradient(180deg, rgba(3, 12, 27, 0.82) 0%, rgba(4, 31, 79, 0.68) 54%, rgba(4, 31, 79, 0.84) 100%),
+      var(--hero-image) center center / cover no-repeat,
+      linear-gradient(180deg, #071b36 0%, #0b1f3a 100%);
   }
 
   .hero-cro .hero-inner {
@@ -2081,6 +2302,11 @@ a.hero-price-card:hover {
     max-width: 640px;
     margin: 0 auto;
   }
+
+  .commercial-quote-card {
+    justify-self: center;
+    max-width: 680px;
+  }
 }
 
 @media (max-width: 820px) {
@@ -2109,6 +2335,12 @@ a.hero-price-card:hover {
     padding: 14px;
   }
 
+  .nav-links a.nav-book-cta {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+  }
+
   .nav-cta .btn {
     display: none;
   }
@@ -2124,12 +2356,23 @@ a.hero-price-card:hover {
     padding-right: 20px;
   }
 
+  .commercial-page-hero {
+    min-height: auto;
+    padding-top: 42px;
+    padding-bottom: 54px;
+    background-position: 58% center;
+  }
+
   .hero-inner {
     gap: 34px;
   }
 
   .hero-actions {
     align-items: stretch;
+  }
+
+  .hero-card-actions {
+    max-width: none;
   }
 
   .hero-actions .btn {
@@ -2163,6 +2406,8 @@ a.hero-price-card:hover {
 
   .two-col,
   .four-col,
+  .five-card-grid,
+  .why-choose-grid,
   .values-grid,
   .form-grid {
     grid-template-columns: 1fr;
@@ -2186,6 +2431,17 @@ a.hero-price-card:hover {
 }
 
 @media (max-width: 760px) {
+  .hero-cro .hero-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-cro .hero-actions .btn,
+  .hero-cro .hero-actions .btn-secondary,
+  .hero-cro .hero-actions .phone-cta-wrap {
+    width: 100%;
+    min-width: 0;
+  }
+
   .google-reviews-carousel {
     --review-gap: 16px;
     --reviews-visible: 1;
@@ -2196,6 +2452,38 @@ a.hero-price-card:hover {
     flex-basis: 100%;
     min-height: 252px;
     padding: 18px;
+  }
+
+  .home-reviews-section .google-reviews-carousel {
+    max-width: 100%;
+  }
+
+  .home-reviews-section .google-reviews-viewport {
+    padding: 0 5%;
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .home-reviews-section .google-reviews-track {
+    gap: 16px;
+  }
+
+  .home-reviews-section .google-review-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 268px;
+    overflow: hidden;
+  }
+
+  .home-reviews-section .google-review-top {
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  .home-reviews-section .review-source {
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
 
   .google-review-card > p {
@@ -2249,12 +2537,12 @@ a.hero-price-card:hover {
   .hero-cro {
     padding-top: 24px;
     padding-bottom: 22px;
+    min-height: auto;
   }
 
   .hero-copy,
   .hero-actions,
   .hero-proof,
-  .hero-pricing,
   .lead {
     width: 100%;
     max-width: calc(100vw - 40px);
@@ -2280,22 +2568,6 @@ a.hero-price-card:hover {
     gap: 6px;
   }
 
-  .hero-pricing {
-    padding: 14px;
-  }
-
-  .hero-pricing-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hero-price-card {
-    padding: 12px 8px;
-  }
-
-  .hero-price-card h2 {
-    font-size: 0.88rem;
-  }
-
   .hero-proof {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2310,6 +2582,14 @@ a.hero-price-card:hover {
   .hero-quote-card {
     max-width: calc(100vw - 40px);
     padding: 22px;
+  }
+
+  .commercial-page-hero {
+    background-position: center center;
+  }
+
+  .commercial-page-hero .page-hero-inner {
+    gap: 26px;
   }
 
   .proof-item {
