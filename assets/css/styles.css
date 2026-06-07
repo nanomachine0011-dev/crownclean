@@ -145,6 +145,7 @@ button {
 
 .nav-dropdown {
   position: relative;
+  z-index: 100;
 }
 
 .nav-dropdown-toggle {
@@ -161,8 +162,8 @@ button {
 
 .nav-dropdown-menu {
   position: absolute;
-  z-index: 10;
-  top: calc(100% + 8px);
+  z-index: 100;
+  top: 100%;
   left: 50%;
   width: 600px;
   display: grid;
@@ -2399,16 +2400,25 @@ h3 {
   .nav-dropdown-menu {
     position: static;
     width: auto;
-    display: grid;
+    display: none;
     grid-template-columns: 1fr;
     padding: 0 0 4px 16px;
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
     transform: none;
     border: 0;
     background: transparent;
     box-shadow: none;
+  }
+
+  .nav-dropdown.is-open .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    display: grid;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
   }
 
   .nav-dropdown-menu a {
@@ -2416,9 +2426,10 @@ h3 {
     font-size: 0.86rem;
   }
 
+  .nav-dropdown.is-open .nav-dropdown-toggle svg,
   .nav-dropdown:hover .nav-dropdown-toggle svg,
   .nav-dropdown:focus-within .nav-dropdown-toggle svg {
-    transform: none;
+    transform: rotate(180deg);
   }
 
   .nav-links a.nav-book-cta {

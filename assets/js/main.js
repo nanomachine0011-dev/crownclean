@@ -1,6 +1,8 @@
 const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelector(".nav-links");
+const commercialDropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
+const mobileNavQuery = window.matchMedia("(max-width: 820px)");
 
 if (window.location.protocol === "file:") {
   const routeMap = new Map([
@@ -51,16 +53,66 @@ if (window.location.protocol === "file:") {
 // Are you looking for end of tenancy, Airbnb or regular home cleaning?"
 // Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a price.
 
+function setCommercialDropdownOpen(dropdown, isOpen) {
+  dropdown.classList.toggle("is-open", isOpen);
+  dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", String(isOpen));
+}
+
+function closeCommercialDropdowns(exceptDropdown = null) {
+  commercialDropdowns.forEach((dropdown) => {
+    if (dropdown !== exceptDropdown) {
+      setCommercialDropdownOpen(dropdown, false);
+    }
+  });
+}
+
+commercialDropdowns.forEach((dropdown, index) => {
+  const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+  const menu = dropdown.querySelector(".nav-dropdown-menu");
+
+  if (!toggle || !menu) return;
+
+  if (!menu.id) {
+    menu.id = `commercial-menu-${index + 1}`;
+  }
+
+  toggle.setAttribute("aria-haspopup", "true");
+  toggle.setAttribute("aria-controls", menu.id);
+  toggle.setAttribute("aria-expanded", "false");
+
+  toggle.addEventListener("click", (event) => {
+    if (!mobileNavQuery.matches) return;
+
+    event.preventDefault();
+    const isOpen = !dropdown.classList.contains("is-open");
+    closeCommercialDropdowns(dropdown);
+    setCommercialDropdownOpen(dropdown, isOpen);
+
+    if (!isOpen) {
+      toggle.blur();
+    }
+  });
+});
+
+mobileNavQuery.addEventListener("change", () => closeCommercialDropdowns());
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     const isOpen = body.classList.toggle("menu-open");
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+    if (!isOpen) {
+      closeCommercialDropdowns();
+    }
   });
 
   navLinks.addEventListener("click", (event) => {
-    if (event.target.closest("a")) {
+    const link = event.target.closest("a");
+
+    if (link && !(mobileNavQuery.matches && link.classList.contains("nav-dropdown-toggle"))) {
       body.classList.remove("menu-open");
       menuToggle.setAttribute("aria-expanded", "false");
+      closeCommercialDropdowns();
     }
   });
 }
