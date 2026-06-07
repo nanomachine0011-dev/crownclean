@@ -7,6 +7,16 @@ if (window.location.protocol === "file:") {
     ["/", "index.html"],
     ["/services", "services.html"],
     ["/commercial-cleaning", "commercial-cleaning.html"],
+    ["/office-cleaning-birmingham", "office-cleaning-birmingham.html"],
+    ["/communal-area-cleaning-birmingham", "communal-area-cleaning-birmingham.html"],
+    ["/retail-cleaning-birmingham", "retail-cleaning-birmingham.html"],
+    ["/commercial-deep-cleaning-birmingham", "commercial-deep-cleaning-birmingham.html"],
+    ["/religious-facility-cleaning-birmingham", "religious-facility-cleaning-birmingham.html"],
+    ["/healthcare-cleaning-birmingham", "healthcare-cleaning-birmingham.html"],
+    ["/school-cleaning-birmingham", "school-cleaning-birmingham.html"],
+    ["/gym-cleaning-birmingham", "gym-cleaning-birmingham.html"],
+    ["/restaurant-cleaning-birmingham", "restaurant-cleaning-birmingham.html"],
+    ["/commercial-carpet-cleaning-birmingham", "commercial-carpet-cleaning-birmingham.html"],
     ["/contact", "contact.html"],
     ["/about", "about.html"],
     ["/locations", "locations.html"],
@@ -67,6 +77,25 @@ function normalizePath(value) {
 }
 
 const currentPage = normalizePath(window.location.pathname);
+const additionalCommercialLinks = [
+  ["/healthcare-cleaning-birmingham", "Healthcare Cleaning"],
+  ["/school-cleaning-birmingham", "School Cleaning"],
+  ["/gym-cleaning-birmingham", "Gym Cleaning"],
+  ["/restaurant-cleaning-birmingham", "Restaurant Cleaning"],
+  ["/commercial-carpet-cleaning-birmingham", "Commercial Carpet Cleaning"],
+];
+
+document.querySelectorAll(".nav-dropdown-menu").forEach((menu) => {
+  additionalCommercialLinks.forEach(([href, label]) => {
+    if (menu.querySelector(`a[href="${href}"]`)) return;
+
+    const link = document.createElement("a");
+    link.href = href;
+    link.textContent = label;
+    menu.appendChild(link);
+  });
+});
+
 const servicePages = new Set([
   "/airbnb-cleaning",
   "/carpet-cleaning",
@@ -75,14 +104,27 @@ const servicePages = new Set([
   "/end-of-tenancy-cleaning-birmingham",
   "/regular-cleaning",
 ]);
+const commercialPages = new Set([
+  "/office-cleaning-birmingham",
+  "/communal-area-cleaning-birmingham",
+  "/retail-cleaning-birmingham",
+  "/commercial-deep-cleaning-birmingham",
+  "/religious-facility-cleaning-birmingham",
+  "/healthcare-cleaning-birmingham",
+  "/school-cleaning-birmingham",
+  "/gym-cleaning-birmingham",
+  "/restaurant-cleaning-birmingham",
+  "/commercial-carpet-cleaning-birmingham",
+]);
 document.querySelectorAll(".nav-links a").forEach((link) => {
   const url = new URL(link.getAttribute("href"), window.location.href);
   const href = normalizePath(url.pathname);
   const hasHash = Boolean(url.hash);
   const hashMatches = hasHash && href === currentPage && url.hash === window.location.hash;
   const isServiceChild = !hasHash && href === "/services" && servicePages.has(currentPage);
+  const isCommercialChild = !hasHash && href === "/commercial-cleaning" && commercialPages.has(currentPage);
 
-  if ((!hasHash && href === currentPage) || hashMatches || isServiceChild) {
+  if ((!hasHash && href === currentPage) || hashMatches || isServiceChild || isCommercialChild) {
     link.classList.add("active");
     link.setAttribute("aria-current", "page");
   }

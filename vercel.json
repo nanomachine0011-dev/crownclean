@@ -27,6 +27,46 @@
       "destination": "/commercial-cleaning.html"
     },
     {
+      "source": "/office-cleaning-birmingham",
+      "destination": "/office-cleaning-birmingham.html"
+    },
+    {
+      "source": "/communal-area-cleaning-birmingham",
+      "destination": "/communal-area-cleaning-birmingham.html"
+    },
+    {
+      "source": "/retail-cleaning-birmingham",
+      "destination": "/retail-cleaning-birmingham.html"
+    },
+    {
+      "source": "/commercial-deep-cleaning-birmingham",
+      "destination": "/commercial-deep-cleaning-birmingham.html"
+    },
+    {
+      "source": "/religious-facility-cleaning-birmingham",
+      "destination": "/religious-facility-cleaning-birmingham.html"
+    },
+    {
+      "source": "/healthcare-cleaning-birmingham",
+      "destination": "/healthcare-cleaning-birmingham.html"
+    },
+    {
+      "source": "/school-cleaning-birmingham",
+      "destination": "/school-cleaning-birmingham.html"
+    },
+    {
+      "source": "/gym-cleaning-birmingham",
+      "destination": "/gym-cleaning-birmingham.html"
+    },
+    {
+      "source": "/restaurant-cleaning-birmingham",
+      "destination": "/restaurant-cleaning-birmingham.html"
+    },
+    {
+      "source": "/commercial-carpet-cleaning-birmingham",
+      "destination": "/commercial-carpet-cleaning-birmingham.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact.html"
     },
