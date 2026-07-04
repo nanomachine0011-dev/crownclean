@@ -23,8 +23,64 @@
       "destination": "/services.html"
     },
     {
+      "source": "/prices",
+      "destination": "/prices.html"
+    },
+    {
+      "source": "/locations",
+      "destination": "/locations.html"
+    },
+    {
+      "source": "/end-of-tenancy-cleaning",
+      "destination": "/end-of-tenancy-cleaning.html"
+    },
+    {
+      "source": "/deep-cleaning",
+      "destination": "/deep-cleaning.html"
+    },
+    {
+      "source": "/after-builders-cleaning",
+      "destination": "/after-builders-cleaning.html"
+    },
+    {
+      "source": "/carpet-cleaning",
+      "destination": "/carpet-cleaning.html"
+    },
+    {
+      "source": "/airbnb-turnover-cleaning",
+      "destination": "/airbnb-turnover-cleaning.html"
+    },
+    {
       "source": "/commercial-cleaning",
       "destination": "/commercial-cleaning.html"
+    },
+    {
+      "source": "/office-cleaning",
+      "destination": "/office-cleaning.html"
+    },
+    {
+      "source": "/end-of-tenancy-cleaning-birmingham",
+      "destination": "/end-of-tenancy-cleaning-birmingham.html"
+    },
+    {
+      "source": "/after-builders-cleaning-birmingham",
+      "destination": "/after-builders-cleaning-birmingham.html"
+    },
+    {
+      "source": "/deep-cleaning-birmingham",
+      "destination": "/deep-cleaning-birmingham.html"
+    },
+    {
+      "source": "/carpet-cleaning-birmingham",
+      "destination": "/carpet-cleaning-birmingham.html"
+    },
+    {
+      "source": "/airbnb-cleaning-birmingham",
+      "destination": "/airbnb-cleaning-birmingham.html"
+    },
+    {
+      "source": "/commercial-cleaning-birmingham",
+      "destination": "/commercial-cleaning-birmingham.html"
     },
     {
       "source": "/office-cleaning-birmingham",
@@ -67,40 +123,64 @@
       "destination": "/commercial-carpet-cleaning-birmingham.html"
     },
     {
-      "source": "/contact",
-      "destination": "/contact.html"
+      "source": "/cleaning-services-birmingham",
+      "destination": "/cleaning-services-birmingham.html"
     },
     {
-      "source": "/about",
-      "destination": "/about.html"
+      "source": "/cleaning-services-edgbaston",
+      "destination": "/cleaning-services-edgbaston.html"
     },
     {
-      "source": "/locations",
-      "destination": "/locations.html"
+      "source": "/cleaning-services-harborne",
+      "destination": "/cleaning-services-harborne.html"
+    },
+    {
+      "source": "/cleaning-services-moseley",
+      "destination": "/cleaning-services-moseley.html"
+    },
+    {
+      "source": "/cleaning-services-kings-heath",
+      "destination": "/cleaning-services-kings-heath.html"
+    },
+    {
+      "source": "/cleaning-services-solihull",
+      "destination": "/cleaning-services-solihull.html"
+    },
+    {
+      "source": "/cleaning-services-sutton-coldfield",
+      "destination": "/cleaning-services-sutton-coldfield.html"
+    },
+    {
+      "source": "/cleaning-services-birmingham-city-centre",
+      "destination": "/cleaning-services-birmingham-city-centre.html"
+    },
+    {
+      "source": "/cleaning-services-selly-oak",
+      "destination": "/cleaning-services-selly-oak.html"
+    },
+    {
+      "source": "/cleaning-services-small-heath",
+      "destination": "/cleaning-services-small-heath.html"
     },
     {
       "source": "/airbnb-cleaning",
       "destination": "/airbnb-cleaning.html"
     },
     {
-      "source": "/end-of-tenancy-cleaning",
-      "destination": "/end-of-tenancy-cleaning.html"
-    },
-    {
-      "source": "/deep-cleaning",
-      "destination": "/deep-cleaning.html"
-    },
-    {
-      "source": "/carpet-cleaning",
-      "destination": "/carpet-cleaning.html"
-    },
-    {
       "source": "/regular-cleaning",
       "destination": "/regular-cleaning.html"
     },
     {
-      "source": "/end-of-tenancy-cleaning-birmingham",
-      "destination": "/end-of-tenancy-cleaning-birmingham.html"
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
     }
   ]
 }
