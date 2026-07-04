@@ -11,6 +11,46 @@
       ],
       "destination": "https://www.depositreadyclean.co.uk/$1",
       "permanent": true
+    },
+    {
+      "source": "/end-of-tenancy-cleaning",
+      "destination": "/end-of-tenancy-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/deep-cleaning",
+      "destination": "/deep-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/after-builders-cleaning",
+      "destination": "/after-builders-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/carpet-cleaning",
+      "destination": "/carpet-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/airbnb-turnover-cleaning",
+      "destination": "/airbnb-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/airbnb-cleaning",
+      "destination": "/airbnb-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/commercial-cleaning",
+      "destination": "/commercial-cleaning-birmingham",
+      "statusCode": 301
+    },
+    {
+      "source": "/office-cleaning",
+      "destination": "/office-cleaning-birmingham",
+      "statusCode": 301
     }
   ],
   "rewrites": [
@@ -53,34 +93,6 @@
     {
       "source": "/articles",
       "destination": "/articles.html"
-    },
-    {
-      "source": "/end-of-tenancy-cleaning",
-      "destination": "/end-of-tenancy-cleaning.html"
-    },
-    {
-      "source": "/deep-cleaning",
-      "destination": "/deep-cleaning.html"
-    },
-    {
-      "source": "/after-builders-cleaning",
-      "destination": "/after-builders-cleaning.html"
-    },
-    {
-      "source": "/carpet-cleaning",
-      "destination": "/carpet-cleaning.html"
-    },
-    {
-      "source": "/airbnb-turnover-cleaning",
-      "destination": "/airbnb-turnover-cleaning.html"
-    },
-    {
-      "source": "/commercial-cleaning",
-      "destination": "/commercial-cleaning.html"
-    },
-    {
-      "source": "/office-cleaning",
-      "destination": "/office-cleaning.html"
     },
     {
       "source": "/end-of-tenancy-cleaning-birmingham",
@@ -185,10 +197,6 @@
     {
       "source": "/cleaning-services-small-heath",
       "destination": "/cleaning-services-small-heath.html"
-    },
-    {
-      "source": "/airbnb-cleaning",
-      "destination": "/airbnb-cleaning.html"
     },
     {
       "source": "/regular-cleaning",

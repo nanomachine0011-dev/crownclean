@@ -16,13 +16,6 @@ if (window.location.protocol === "file:") {
     ["/articles/end-of-tenancy-cleaning-cost-birmingham", "articles/end-of-tenancy-cleaning-cost-birmingham.html"],
     ["/articles/end-of-tenancy-cleaning-checklist-birmingham", "articles/end-of-tenancy-cleaning-checklist-birmingham.html"],
     ["/articles", "articles.html"],
-    ["/end-of-tenancy-cleaning", "end-of-tenancy-cleaning.html"],
-    ["/deep-cleaning", "deep-cleaning.html"],
-    ["/after-builders-cleaning", "after-builders-cleaning.html"],
-    ["/carpet-cleaning", "carpet-cleaning.html"],
-    ["/airbnb-turnover-cleaning", "airbnb-turnover-cleaning.html"],
-    ["/commercial-cleaning", "commercial-cleaning.html"],
-    ["/office-cleaning", "office-cleaning.html"],
     ["/end-of-tenancy-cleaning-birmingham", "end-of-tenancy-cleaning-birmingham.html"],
     ["/after-builders-cleaning-birmingham", "after-builders-cleaning-birmingham.html"],
     ["/deep-cleaning-birmingham", "deep-cleaning-birmingham.html"],
@@ -49,7 +42,6 @@ if (window.location.protocol === "file:") {
     ["/cleaning-services-birmingham-city-centre", "cleaning-services-birmingham-city-centre.html"],
     ["/cleaning-services-selly-oak", "cleaning-services-selly-oak.html"],
     ["/cleaning-services-small-heath", "cleaning-services-small-heath.html"],
-    ["/airbnb-cleaning", "airbnb-cleaning.html"],
     ["/regular-cleaning", "regular-cleaning.html"],
     ["/about", "about.html"],
     ["/contact", "contact.html"],
@@ -155,8 +147,6 @@ function normalizePath(value) {
 
 const currentPage = normalizePath(window.location.pathname);
 const additionalCommercialLinks = [
-  ["/commercial-cleaning", "Commercial Cleaning"],
-  ["/office-cleaning", "Office Cleaning"],
   ["/commercial-cleaning-birmingham", "Commercial Cleaning Birmingham"],
   ["/office-cleaning-birmingham", "Office Cleaning Birmingham"],
   ["/communal-area-cleaning-birmingham", "Communal Area Cleaning"],
@@ -182,24 +172,14 @@ document.querySelectorAll(".nav-dropdown-menu").forEach((menu) => {
 });
 
 const servicePages = new Set([
-  "/end-of-tenancy-cleaning",
-  "/deep-cleaning",
-  "/after-builders-cleaning",
-  "/carpet-cleaning",
-  "/airbnb-turnover-cleaning",
-  "/commercial-cleaning",
-  "/office-cleaning",
   "/end-of-tenancy-cleaning-birmingham",
   "/after-builders-cleaning-birmingham",
   "/deep-cleaning-birmingham",
   "/carpet-cleaning-birmingham",
   "/airbnb-cleaning-birmingham",
   "/regular-cleaning",
-  "/airbnb-cleaning",
 ]);
 const commercialPages = new Set([
-  "/commercial-cleaning",
-  "/office-cleaning",
   "/commercial-cleaning-birmingham",
   "/office-cleaning-birmingham",
   "/communal-area-cleaning-birmingham",
@@ -218,7 +198,7 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   const hasHash = Boolean(url.hash);
   const hashMatches = hasHash && href === currentPage && url.hash === window.location.hash;
   const isServiceChild = !hasHash && href === "/services" && servicePages.has(currentPage);
-  const isCommercialChild = !hasHash && href === "/commercial-cleaning" && commercialPages.has(currentPage);
+  const isCommercialChild = !hasHash && href === "/commercial-cleaning-birmingham" && commercialPages.has(currentPage);
 
   if ((!hasHash && href === currentPage) || hashMatches || isServiceChild || isCommercialChild) {
     link.classList.add("active");
