@@ -2,7 +2,7 @@ const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelector(".nav-links");
 const commercialDropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
-const mobileNavQuery = window.matchMedia("(max-width: 820px)");
+const mobileNavQuery = window.matchMedia("(max-width: 980px)");
 
 if (window.location.protocol === "file:") {
   const routeMap = new Map([
@@ -66,7 +66,7 @@ if (window.location.protocol === "file:") {
 
 // WhatsApp Business auto-replies cannot be configured from this static site.
 // Set them manually in the WhatsApp Business app:
-// Greeting: "Hi 👋 thanks for contacting DepositReady Clean.
+// Greeting: "Hi, thanks for contacting DepositReadyClean.
 // Are you looking for end of tenancy, Airbnb or regular home cleaning?"
 // Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a price.
 
@@ -147,12 +147,11 @@ function normalizePath(value) {
 
 const currentPage = normalizePath(window.location.pathname);
 const additionalCommercialLinks = [
-  ["/commercial-cleaning-birmingham", "Commercial Cleaning Birmingham"],
-  ["/office-cleaning-birmingham", "Office Cleaning Birmingham"],
+  ["/commercial-cleaning-birmingham", "Commercial Cleaning"],
+  ["/office-cleaning-birmingham", "Office Cleaning"],
   ["/communal-area-cleaning-birmingham", "Communal Area Cleaning"],
   ["/retail-cleaning-birmingham", "Retail Cleaning"],
   ["/commercial-deep-cleaning-birmingham", "Commercial Deep Cleaning"],
-  ["/religious-facility-cleaning-birmingham", "Religious Facility Cleaning"],
   ["/healthcare-cleaning-birmingham", "Healthcare Cleaning"],
   ["/school-cleaning-birmingham", "School Cleaning"],
   ["/gym-cleaning-birmingham", "Gym Cleaning"],
@@ -185,7 +184,6 @@ const commercialPages = new Set([
   "/communal-area-cleaning-birmingham",
   "/retail-cleaning-birmingham",
   "/commercial-deep-cleaning-birmingham",
-  "/religious-facility-cleaning-birmingham",
   "/healthcare-cleaning-birmingham",
   "/school-cleaning-birmingham",
   "/gym-cleaning-birmingham",
@@ -443,6 +441,38 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
 const GOOGLE_ADS_CONVERSION_ID = "AW-18139524774";
 const GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL = "HbBlCK-bvKccEKbdzMlD";
 const GOOGLE_ADS_LEAD_FORM_SEND_TO = `${GOOGLE_ADS_CONVERSION_ID}/${GOOGLE_ADS_LEAD_FORM_CONVERSION_LABEL}`;
+
+function pushTrackingEvent(eventName, eventParams = {}) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: eventName,
+    ...eventParams,
+  });
+}
+
+document.querySelectorAll("[data-track-click]").forEach((target) => {
+  target.addEventListener("click", () => {
+    pushTrackingEvent("drc_click", {
+      click_type: target.dataset.trackClick,
+      click_text: target.textContent.trim(),
+      click_url: target.href || "",
+      page_path: window.location.pathname,
+    });
+  });
+});
+
+document.querySelectorAll("[data-track-form-submit]").forEach((form) => {
+  form.addEventListener(
+    "submit",
+    () => {
+      pushTrackingEvent("drc_form_submit_attempt", {
+        form_source: form.dataset.source || document.title,
+        page_path: window.location.pathname,
+      });
+    },
+    { capture: true }
+  );
+});
 
 function trackLeadFormConversion() {
   if (typeof window.gtag !== "function") return;
