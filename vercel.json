@@ -31,6 +31,30 @@
       "destination": "/locations.html"
     },
     {
+      "source": "/articles/office-cleaning-checklist-birmingham",
+      "destination": "/articles/office-cleaning-checklist-birmingham.html"
+    },
+    {
+      "source": "/articles/deep-cleaning-vs-end-of-tenancy-cleaning",
+      "destination": "/articles/deep-cleaning-vs-end-of-tenancy-cleaning.html"
+    },
+    {
+      "source": "/articles/after-builders-cleaning-checklist",
+      "destination": "/articles/after-builders-cleaning-checklist.html"
+    },
+    {
+      "source": "/articles/end-of-tenancy-cleaning-cost-birmingham",
+      "destination": "/articles/end-of-tenancy-cleaning-cost-birmingham.html"
+    },
+    {
+      "source": "/articles/end-of-tenancy-cleaning-checklist-birmingham",
+      "destination": "/articles/end-of-tenancy-cleaning-checklist-birmingham.html"
+    },
+    {
+      "source": "/articles",
+      "destination": "/articles.html"
+    },
+    {
       "source": "/end-of-tenancy-cleaning",
       "destination": "/end-of-tenancy-cleaning.html"
     },
