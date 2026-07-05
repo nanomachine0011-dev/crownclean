@@ -1922,6 +1922,7 @@ h3 {
 }
 
 .service-card-image {
+  position: relative;
   display: block;
   aspect-ratio: 16 / 10;
   margin: -10px -10px 4px;
@@ -1929,18 +1930,54 @@ h3 {
   border: 1px solid rgba(219, 230, 244, 0.9);
   border-radius: calc(var(--radius) - 4px);
   background: var(--blue-50);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
 }
 
-.service-card-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.service-card-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--service-card-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  pointer-events: none;
   transition: transform 220ms ease;
 }
 
-.service-link-card:hover .service-card-image img {
+.service-link-card:hover .service-card-image::before {
   transform: scale(1.025);
+}
+
+.service-card-image-end-tenancy {
+  --service-card-image: url("/assets/img/service-card-end-of-tenancy.webp");
+}
+
+.service-card-image-deep-cleaning {
+  --service-card-image: url("/assets/img/service-card-deep-cleaning.webp");
+}
+
+.service-card-image-after-builders {
+  --service-card-image: url("/assets/img/service-card-after-builders.webp");
+}
+
+.service-card-image-carpet-cleaning {
+  --service-card-image: url("/assets/img/service-card-carpet-cleaning.webp");
+}
+
+.service-card-image-airbnb-turnover {
+  --service-card-image: url("/assets/img/service-card-airbnb-turnover.webp");
+}
+
+.service-card-image-commercial-cleaning {
+  --service-card-image: url("/assets/img/service-card-commercial-cleaning.webp");
+}
+
+.service-card-image-office-cleaning {
+  --service-card-image: url("/assets/img/service-card-office-cleaning.webp");
 }
 
 .service-link-card h3 {
