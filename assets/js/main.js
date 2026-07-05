@@ -229,6 +229,26 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   }
 });
 
+document.querySelectorAll("[data-postcode-coverage]").forEach((coverage, index) => {
+  const grid = coverage.querySelector(".postcode-chip-grid");
+  const toggle = coverage.querySelector("[data-postcode-toggle]");
+
+  if (!grid || !toggle) return;
+
+  if (!grid.id) {
+    grid.id = `postcode-chip-grid-${index + 1}`;
+  }
+
+  toggle.setAttribute("aria-controls", grid.id);
+  toggle.setAttribute("aria-expanded", "false");
+
+  toggle.addEventListener("click", () => {
+    const isExpanded = coverage.classList.toggle("is-expanded");
+    toggle.setAttribute("aria-expanded", String(isExpanded));
+    toggle.textContent = isExpanded ? "Show fewer postcodes" : "Show all postcodes";
+  });
+});
+
 const revealItems = document.querySelectorAll(".reveal");
 
 if ("IntersectionObserver" in window) {

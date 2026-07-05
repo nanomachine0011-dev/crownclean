@@ -2143,6 +2143,97 @@ h3 {
   background: var(--blue-050);
 }
 
+.postcode-coverage {
+  margin-top: 26px;
+  padding: 22px;
+  border: 1px solid rgba(22, 104, 232, 0.14);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, #ffffff, rgba(245, 248, 255, 0.74));
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.postcode-coverage h3 {
+  margin: 0 0 8px;
+  color: var(--blue-900);
+  font-size: 1.1rem;
+}
+
+.postcode-coverage p {
+  max-width: 760px;
+  margin: 0 auto 16px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.postcode-chip-grid {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 104px;
+  gap: 8px;
+  justify-content: center;
+  overflow: hidden;
+  transition: max-height 220ms ease;
+}
+
+.postcode-chip-grid::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 34px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #ffffff 88%);
+  pointer-events: none;
+}
+
+.postcode-coverage.is-expanded .postcode-chip-grid {
+  max-height: 560px;
+}
+
+.postcode-coverage.is-expanded .postcode-chip-grid::after {
+  display: none;
+}
+
+.postcode-chip-grid span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid rgba(22, 104, 232, 0.16);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--blue-800);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 8px 18px rgba(4, 31, 79, 0.05);
+}
+
+.postcode-toggle {
+  margin-top: 14px;
+  padding: 9px 14px;
+  border: 1px solid rgba(22, 104, 232, 0.2);
+  border-radius: 999px;
+  background: var(--blue-900);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.postcode-toggle:hover,
+.postcode-toggle:focus-visible {
+  background: var(--blue-800);
+  box-shadow: 0 12px 24px rgba(4, 31, 79, 0.14);
+  transform: translateY(-1px);
+}
+
 .center-actions {
   display: flex;
   justify-content: center;
@@ -2980,6 +3071,21 @@ h3 {
   .home-reviews-section .google-review-card > p {
     -webkit-line-clamp: 5;
     max-height: calc(1.62em * 5);
+  }
+
+  .postcode-coverage {
+    padding: 18px 14px;
+  }
+
+  .postcode-chip-grid {
+    max-height: 112px;
+    gap: 7px;
+  }
+
+  .postcode-chip-grid span {
+    min-width: 38px;
+    min-height: 30px;
+    padding: 6px 9px;
   }
 }
 
