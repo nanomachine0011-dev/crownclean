@@ -1445,15 +1445,18 @@ h3 {
 
 .home-reviews-section .google-review-card {
   flex-basis: calc((100% - 32px) / 3);
-  min-height: 198px;
-  padding: 14px;
-  gap: 10px;
+  min-height: 332px;
+  padding: 18px;
+  gap: 12px;
 }
 
 .home-reviews-section .google-review-card > p {
-  line-height: 1.5;
-  max-height: calc(1.5em * 3);
-  -webkit-line-clamp: 3;
+  display: block;
+  line-height: 1.58;
+  max-height: 12.7rem;
+  overflow-y: auto;
+  padding-right: 4px;
+  -webkit-line-clamp: unset;
 }
 
 .home-reviews-section .google-review-card .testimonial-person {
@@ -2885,8 +2888,12 @@ h3 {
     flex: 0 0 100%;
     max-width: 100%;
     min-width: 0;
-    min-height: 268px;
+    min-height: 362px;
     overflow: hidden;
+  }
+
+  .home-reviews-section .google-review-card > p {
+    max-height: 14rem;
   }
 
   .home-reviews-section .google-review-top {

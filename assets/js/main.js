@@ -268,14 +268,15 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   const previousButton = carousel.querySelector("[data-review-prev]");
   const nextButton = carousel.querySelector("[data-review-next]");
   const dotsContainer = carousel.querySelector("[data-review-dots]");
-  const autoSlideInterval = 4500;
-  const manualPauseDuration = autoSlideInterval * 2;
+  const autoSlideInterval = 10000;
+  const manualPauseDuration = autoSlideInterval;
   let currentIndex = 0;
   let autoSlideTimer = 0;
   let manualPauseTimer = 0;
   let isPointerPaused = false;
   let isFocusPaused = false;
   let isManualPaused = false;
+  let isTouchPaused = false;
   let dotButtons = [];
   let touchStartX = 0;
   let touchStartY = 0;
@@ -293,12 +294,15 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
 
   function getMaxStartIndex() {
     const visibleCount = getVisibleCount();
-    return Math.max(0, Math.floor((cards.length - 1) / visibleCount) * visibleCount);
+    return Math.max(0, cards.length - visibleCount);
   }
 
   function getGroupStart(index) {
-    const visibleCount = getVisibleCount();
-    return Math.min(Math.floor(Math.max(index, 0) / visibleCount) * visibleCount, getMaxStartIndex());
+    const starts = getPageStarts();
+
+    return starts.reduce((closest, start) => {
+      return Math.abs(start - index) < Math.abs(closest - index) ? start : closest;
+    }, starts[0] || 0);
   }
 
   function getPageStarts() {
@@ -306,9 +310,11 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     const maxIndex = getMaxStartIndex();
     const starts = [];
 
-    for (let index = 0; index <= maxIndex; index += visibleCount) {
+    for (let index = 0; index < maxIndex; index += visibleCount) {
       starts.push(index);
     }
+
+    if (!starts.includes(maxIndex)) starts.push(maxIndex);
 
     return starts;
   }
@@ -334,8 +340,8 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     currentIndex = Math.min(Math.max(currentIndex, 0), maxIndex);
     if (snapToGroup) currentIndex = getGroupStart(currentIndex);
     track.style.transform = `translateX(-${currentIndex * getSlideDistance()}px)`;
-    previousButton.disabled = maxIndex === 0;
-    nextButton.disabled = maxIndex === 0;
+    previousButton.disabled = getPageStarts().length <= 1;
+    nextButton.disabled = getPageStarts().length <= 1;
     updateDots();
   }
 
@@ -370,10 +376,12 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
     const maxIndex = getMaxStartIndex();
 
     stopAutoSlide();
-    if (maxIndex === 0 || isPointerPaused || isFocusPaused || isManualPaused) return;
+    if (maxIndex === 0 || isPointerPaused || isFocusPaused || isManualPaused || isTouchPaused) return;
 
     autoSlideTimer = window.setInterval(() => {
-      currentIndex = currentIndex >= maxIndex ? 0 : Math.min(getGroupStart(currentIndex) + getVisibleCount(), maxIndex);
+      const starts = getPageStarts();
+      const currentPageIndex = starts.indexOf(getGroupStart(currentIndex));
+      currentIndex = currentPageIndex >= starts.length - 1 ? starts[0] : starts[currentPageIndex + 1];
       updateCarousel();
     }, autoSlideInterval);
   }
@@ -389,15 +397,17 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   }
 
   function showPreviousReview() {
-    const maxIndex = getMaxStartIndex();
-    currentIndex = currentIndex <= 0 ? maxIndex : Math.max(getGroupStart(currentIndex) - getVisibleCount(), 0);
+    const starts = getPageStarts();
+    const currentPageIndex = starts.indexOf(getGroupStart(currentIndex));
+    currentIndex = currentPageIndex <= 0 ? starts[starts.length - 1] : starts[currentPageIndex - 1];
     updateCarousel();
     pauseAfterManualMove();
   }
 
   function showNextReview() {
-    const maxIndex = getMaxStartIndex();
-    currentIndex = currentIndex >= maxIndex ? 0 : Math.min(getGroupStart(currentIndex) + getVisibleCount(), maxIndex);
+    const starts = getPageStarts();
+    const currentPageIndex = starts.indexOf(getGroupStart(currentIndex));
+    currentIndex = currentPageIndex >= starts.length - 1 ? starts[0] : starts[currentPageIndex + 1];
     updateCarousel();
     pauseAfterManualMove();
   }
@@ -411,6 +421,8 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
       const touch = event.changedTouches[0];
       touchStartX = touch.clientX;
       touchStartY = touch.clientY;
+      isTouchPaused = true;
+      stopAutoSlide();
     },
     { passive: true }
   );
@@ -421,13 +433,28 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
       const touch = event.changedTouches[0];
       const deltaX = touch.clientX - touchStartX;
       const deltaY = touch.clientY - touchStartY;
+      let didSwipe = false;
 
-      if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
-      if (deltaX > 0) {
-        showPreviousReview();
-      } else {
-        showNextReview();
+      if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) >= Math.abs(deltaY)) {
+        didSwipe = true;
+        if (deltaX > 0) {
+          showPreviousReview();
+        } else {
+          showNextReview();
+        }
       }
+
+      isTouchPaused = false;
+      if (!didSwipe) startAutoSlide();
+    },
+    { passive: true }
+  );
+
+  carousel.addEventListener(
+    "touchcancel",
+    () => {
+      isTouchPaused = false;
+      startAutoSlide();
     },
     { passive: true }
   );
