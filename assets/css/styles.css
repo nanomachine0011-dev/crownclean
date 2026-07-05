@@ -2143,6 +2143,19 @@ h3 {
   background: var(--blue-050);
 }
 
+.coverage-area-grid {
+  max-width: 1040px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.coverage-area-grid a,
+.coverage-area-grid span {
+  min-height: 38px;
+  padding: 9px 12px;
+  font-size: 0.84rem;
+}
+
 .postcode-coverage {
   margin-top: 26px;
   padding: 22px;
