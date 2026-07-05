@@ -146,7 +146,7 @@ function normalizePath(value) {
 }
 
 const currentPage = normalizePath(window.location.pathname);
-const additionalCommercialLinks = [
+const commercialLinks = [
   ["/commercial-cleaning-birmingham", "Commercial Cleaning"],
   ["/office-cleaning-birmingham", "Office Cleaning"],
   ["/communal-area-cleaning-birmingham", "Communal Area Cleaning"],
@@ -160,9 +160,8 @@ const additionalCommercialLinks = [
 ];
 
 document.querySelectorAll(".nav-dropdown-menu").forEach((menu) => {
-  additionalCommercialLinks.forEach(([href, label]) => {
-    if (menu.querySelector(`a[href="${href}"]`)) return;
-
+  menu.textContent = "";
+  commercialLinks.forEach(([href, label]) => {
     const link = document.createElement("a");
     link.href = href;
     link.textContent = label;
