@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 190" role="img" aria-labelledby="title desc">
-  <title id="title">DepositReadyClean</title>
+  <title id="title">Deposit Ready Clean</title>
   <desc id="desc">House outline with a bright blue check mark and sparkle icons.</desc>
   <defs>
     <linearGradient id="checkGradient" x1="104" y1="138" x2="210" y2="52" gradientUnits="userSpaceOnUse">
@@ -13,9 +13,8 @@
     <path d="M80 112 111 141 183 54" fill="none" stroke="url(#checkGradient)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M196 33v18M187 42h18M25 37v14M18 44h14M200 131v16M192 139h16" fill="none" stroke="#1687f2" stroke-width="7" stroke-linecap="round"/>
   </g>
-  <g transform="translate(245 45)">
-    <text x="0" y="50" fill="#041f4f" font-family="Poppins, Inter, Arial, sans-serif" font-size="46" font-weight="800" letter-spacing="0">DepositReady</text>
-    <text x="0" y="99" fill="#075ee7" font-family="Poppins, Inter, Arial, sans-serif" font-size="46" font-weight="800" letter-spacing="0">Clean</text>
-    <text x="2" y="133" fill="#60738f" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="0">End of Tenancy &#8226; Airbnb &#8226; House Cleaning</text>
+  <g transform="translate(245 46)">
+    <text x="0" y="52" fill="#041f4f" font-family="Poppins, Inter, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="0">Deposit Ready</text>
+    <text x="0" y="104" fill="#075ee7" font-family="Poppins, Inter, Arial, sans-serif" font-size="48" font-weight="800" letter-spacing="0">Clean</text>
   </g>
 </svg>
