@@ -1445,18 +1445,49 @@ h3 {
 
 .home-reviews-section .google-review-card {
   flex-basis: calc((100% - 32px) / 3);
-  min-height: 332px;
-  padding: 18px;
-  gap: 12px;
+  min-height: 292px;
+  padding: 20px;
+  gap: 18px;
+  overflow: hidden;
 }
 
 .home-reviews-section .google-review-card > p {
-  display: block;
-  line-height: 1.58;
-  max-height: 12.7rem;
-  overflow-y: auto;
-  padding-right: 4px;
-  -webkit-line-clamp: unset;
+  display: -webkit-box;
+  line-height: 1.62;
+  max-height: none;
+  overflow: hidden;
+  color: #314b6c;
+  font-size: 0.98rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+}
+
+.home-reviews-section .review-card-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-reviews-section .review-card-person {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.home-reviews-section .review-card-person strong {
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-reviews-section .review-card-person .stars {
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
 }
 
 .home-reviews-section .google-review-card .testimonial-person {
@@ -1467,6 +1498,7 @@ h3 {
   min-height: 26px;
   padding: 0 9px;
   font-size: 0.72rem;
+  align-self: start;
 }
 
 .home-reviews-section .google-reviews-controls {
@@ -2888,27 +2920,29 @@ h3 {
     flex: 0 0 100%;
     max-width: 100%;
     min-width: 0;
-    min-height: 362px;
+    min-height: 314px;
     overflow: hidden;
   }
 
-  .home-reviews-section .google-review-card > p {
-    max-height: 14rem;
-  }
-
-  .home-reviews-section .google-review-top {
-    align-items: flex-start;
-    min-width: 0;
+  .home-reviews-section .review-card-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
   }
 
   .home-reviews-section .review-source {
-    flex: 0 0 auto;
+    grid-column: 2;
+    justify-self: start;
     white-space: nowrap;
   }
 
   .google-review-card > p {
     -webkit-line-clamp: 4;
     max-height: calc(1.55em * 4);
+  }
+
+  .home-reviews-section .google-review-card > p {
+    -webkit-line-clamp: 5;
+    max-height: calc(1.62em * 5);
   }
 }
 
