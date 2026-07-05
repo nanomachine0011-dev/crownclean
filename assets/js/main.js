@@ -570,10 +570,11 @@ document.querySelectorAll("[data-form]").forEach((form) => {
 
     const formData = new FormData(form);
     const fields = Object.fromEntries(formData.entries());
+    const customerMessage = String(fields.message || "").trim();
     const payload = {
       name: String(fields.name || "").trim(),
       phone: String(fields.phone || "").trim(),
-      message: String(fields.message || "").trim(),
+      message: customerMessage || "Fast quote request submitted from the simplified quote form.",
       source: form.dataset.source || document.title,
       fields,
     };

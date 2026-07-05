@@ -517,6 +517,18 @@ h3 {
   flex: 0 0 auto;
 }
 
+.btn-small {
+  min-height: 42px;
+  padding: 0 16px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+}
+
+.btn-small .whatsapp-icon {
+  width: 18px;
+  height: 18px;
+}
+
 .btn-secondary {
   color: var(--blue-900);
   background: var(--white);
@@ -1023,6 +1035,25 @@ h3 {
   color: var(--muted);
   font-size: 0.94rem;
   line-height: 1.6;
+}
+
+.form-whatsapp-option {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid rgba(37, 211, 102, 0.18);
+  border-radius: var(--radius);
+  background: rgba(37, 211, 102, 0.07);
+}
+
+.form-whatsapp-option > span {
+  color: #38506e;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.45;
 }
 
 .form-success,
@@ -3084,6 +3115,14 @@ h3 {
   .home-reviews-section .google-review-card > p {
     -webkit-line-clamp: 5;
     max-height: calc(1.62em * 5);
+  }
+
+  .form-whatsapp-option {
+    align-items: stretch;
+  }
+
+  .form-whatsapp-option .btn {
+    width: 100%;
   }
 
   .postcode-coverage {

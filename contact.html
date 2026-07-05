@@ -87,18 +87,18 @@
       <div class="container contact-layout">
         <div class="contact-form-card reveal">
           <p class="section-kicker">Quote request</p>
-          <h2>Send your property details.</h2>
-          <p class="form-helper">For a faster quote, you can send photos by WhatsApp after submitting the basics. Photos help us confirm property condition, access and extras.</p>
+          <h2>Get a Fast Cleaning Quote</h2>
+          <p class="form-helper">Tell us the basics and we&rsquo;ll reply with availability and a clear quote. You can send photos on WhatsApp after submitting.</p>
           <form class="form" data-form data-source="Contact page price form" data-track-form-submit>
+            <input type="hidden" name="email" value="">
+            <input type="hidden" name="propertyType" value="">
+            <input type="hidden" name="preferredDate" value="">
             <div class="grid two-col form-grid">
               <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required></div>
               <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="Mobile number" required></div>
             </div>
             <div class="grid two-col form-grid">
-              <div class="field"><label for="email">Email (optional)</label><input id="email" name="email" type="email" placeholder="Your email address"></div>
               <div class="field"><label for="postcode">Postcode</label><input id="postcode" name="postcode" type="text" placeholder="e.g. B15, B17, B30" required></div>
-            </div>
-            <div class="grid two-col form-grid">
               <div class="field">
                 <label for="service">Service needed</label>
                 <select id="service" name="service" required>
@@ -114,23 +114,13 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="field">
-                <label for="property-type">Property type (optional)</label>
-                <select id="property-type" name="propertyType">
-                  <option value="">Choose property type</option>
-                  <option>Studio</option>
-                  <option>1 bedroom</option>
-                  <option>2 bedrooms</option>
-                  <option>3 bedrooms</option>
-                  <option>4+ bedrooms</option>
-                  <option>Airbnb/short-stay property</option>
-                  <option>Other</option>
-                </select>
-              </div>
             </div>
-            <div class="field"><label for="preferred-date">Preferred date (optional)</label><input id="preferred-date" name="preferredDate" type="date"></div>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us your property size, move-out date, postcode and anything that needs extra attention." required></textarea></div>
-            <button class="btn btn-primary" type="submit">Get a Fast Quote</button>
+            <div class="field"><label for="message">Message (optional)</label><textarea id="message" name="message" placeholder="Anything we should know? Property size, access, extras or preferred date."></textarea></div>
+            <button class="btn btn-primary" type="submit">Get My Quote</button>
+            <div class="form-whatsapp-option">
+              <span>Prefer WhatsApp? Send photos and details for a faster quote.</span>
+              <a class="btn btn-whatsapp btn-small track-whatsapp" href="https://wa.me/447591786116?text=Hi%2C%20I%20would%20like%20a%20cleaning%20quote%20in%20Birmingham.%20My%20postcode%20is%3A" data-track-click="whatsapp"><img class="whatsapp-icon" src="/assets/img/whatsapp-logo.svg" alt="" width="21" height="21" aria-hidden="true" loading="lazy"><span>WhatsApp Quote</span></a>
+            </div>
             <p class="form-success" role="status">Thanks. Your quote request has been sent to DepositReadyClean. We will reply by phone or email.</p>
             <p class="form-error" role="alert">Sorry, something went wrong. Please call 0121 819 0341, email hello@depositreadyclean.co.uk or try again.</p>
             <span class="form-note">By submitting, you agree for us to contact you about your cleaning enquiry. You can also email <a href="mailto:hello@depositreadyclean.co.uk">hello@depositreadyclean.co.uk</a>.</span>
