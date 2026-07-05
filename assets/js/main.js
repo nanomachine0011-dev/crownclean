@@ -293,8 +293,7 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
   }
 
   function getMaxStartIndex() {
-    const visibleCount = getVisibleCount();
-    return Math.max(0, cards.length - visibleCount);
+    return Math.max(0, cards.length - 1);
   }
 
   function getGroupStart(index) {
@@ -307,14 +306,11 @@ document.querySelectorAll("[data-review-carousel]").forEach((carousel) => {
 
   function getPageStarts() {
     const visibleCount = getVisibleCount();
-    const maxIndex = getMaxStartIndex();
     const starts = [];
 
-    for (let index = 0; index < maxIndex; index += visibleCount) {
+    for (let index = 0; index < cards.length; index += visibleCount) {
       starts.push(index);
     }
-
-    if (!starts.includes(maxIndex)) starts.push(maxIndex);
 
     return starts;
   }
