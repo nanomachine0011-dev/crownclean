@@ -82,14 +82,13 @@ button {
 }
 
 .nav {
-  max-width: var(--max);
-  margin: 0 auto;
+  width: 100%;
   min-height: 92px;
-  padding: 0 28px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: clamp(14px, 2vw, 28px);
 }
 
 .brand {
@@ -141,6 +140,7 @@ button {
   display: flex;
   align-items: center;
   gap: 4px;
+  margin-left: auto;
 }
 
 .nav-dropdown {
@@ -425,8 +425,12 @@ h3 {
   order: 4;
 }
 
-.home-main > .hero-cro {
+.home-main > .seo-trust-bar {
   order: 0;
+}
+
+.home-main > .hero-cro {
+  order: 1;
 }
 
 .home-main > .home-reviews-section {
@@ -650,6 +654,41 @@ h3 {
 
 .hero-cro .hero-actions .phone-cta-wrap {
   flex: 0 0 auto;
+}
+
+.hero-cro.hero-centered {
+  min-height: min(720px, calc(100vh - 132px));
+}
+
+.hero-cro.hero-centered .hero-inner {
+  max-width: 980px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-cro.hero-centered .hero-copy {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-cro.hero-centered .hero-eyebrow,
+.hero-cro.hero-centered h1,
+.hero-cro.hero-centered .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cro.hero-centered h1 {
+  max-width: 900px;
+}
+
+.hero-cro.hero-centered .lead {
+  max-width: 760px;
+}
+
+.hero-cro.hero-centered .hero-actions {
+  justify-content: center;
 }
 
 .hero-trust-list {
@@ -2536,6 +2575,10 @@ h3 {
     gap: 26px;
   }
 
+  .hero-cro.hero-centered .hero-inner {
+    display: flex;
+  }
+
   .hero-copy {
     padding: 0;
   }
@@ -2580,6 +2623,7 @@ h3 {
     display: none;
     flex-direction: column;
     align-items: stretch;
+    margin-left: 0;
     max-height: calc(100vh - 148px);
     overflow-y: auto;
     padding: 14px;
@@ -2746,6 +2790,14 @@ h3 {
 }
 
 @media (max-width: 760px) {
+  .hero-cro.hero-centered .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero-cro .hero-actions {
     flex-wrap: wrap;
   }
@@ -2852,6 +2904,10 @@ h3 {
   .hero-cro {
     padding-top: 24px;
     padding-bottom: 22px;
+    min-height: auto;
+  }
+
+  .hero-cro.hero-centered {
     min-height: auto;
   }
 
