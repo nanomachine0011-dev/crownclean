@@ -1,7 +1,7 @@
 const body = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const navLinks = document.querySelector(".nav-links");
-const commercialDropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
+const navDropdowns = Array.from(document.querySelectorAll(".nav-dropdown"));
 const mobileNavQuery = window.matchMedia("(max-width: 980px)");
 
 if (window.location.protocol === "file:") {
@@ -70,27 +70,27 @@ if (window.location.protocol === "file:") {
 // Are you looking for end of tenancy, Airbnb or regular home cleaning?"
 // Quick replies: End of tenancy clean; Airbnb turnover; Regular cleaning; Get a price.
 
-function setCommercialDropdownOpen(dropdown, isOpen) {
+function setNavDropdownOpen(dropdown, isOpen) {
   dropdown.classList.toggle("is-open", isOpen);
   dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", String(isOpen));
 }
 
-function closeCommercialDropdowns(exceptDropdown = null) {
-  commercialDropdowns.forEach((dropdown) => {
+function closeNavDropdowns(exceptDropdown = null) {
+  navDropdowns.forEach((dropdown) => {
     if (dropdown !== exceptDropdown) {
-      setCommercialDropdownOpen(dropdown, false);
+      setNavDropdownOpen(dropdown, false);
     }
   });
 }
 
-commercialDropdowns.forEach((dropdown, index) => {
+navDropdowns.forEach((dropdown, index) => {
   const toggle = dropdown.querySelector(".nav-dropdown-toggle");
   const menu = dropdown.querySelector(".nav-dropdown-menu");
 
   if (!toggle || !menu) return;
 
   if (!menu.id) {
-    menu.id = `commercial-menu-${index + 1}`;
+    menu.id = `nav-dropdown-menu-${index + 1}`;
   }
 
   toggle.setAttribute("aria-haspopup", "true");
@@ -102,8 +102,8 @@ commercialDropdowns.forEach((dropdown, index) => {
 
     event.preventDefault();
     const isOpen = !dropdown.classList.contains("is-open");
-    closeCommercialDropdowns(dropdown);
-    setCommercialDropdownOpen(dropdown, isOpen);
+    closeNavDropdowns(dropdown);
+    setNavDropdownOpen(dropdown, isOpen);
 
     if (!isOpen) {
       toggle.blur();
@@ -111,7 +111,7 @@ commercialDropdowns.forEach((dropdown, index) => {
   });
 });
 
-mobileNavQuery.addEventListener("change", () => closeCommercialDropdowns());
+mobileNavQuery.addEventListener("change", () => closeNavDropdowns());
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
@@ -119,7 +119,7 @@ if (menuToggle && navLinks) {
     menuToggle.setAttribute("aria-expanded", String(isOpen));
 
     if (!isOpen) {
-      closeCommercialDropdowns();
+      closeNavDropdowns();
     }
   });
 
@@ -129,7 +129,7 @@ if (menuToggle && navLinks) {
     if (link && !(mobileNavQuery.matches && link.classList.contains("nav-dropdown-toggle"))) {
       body.classList.remove("menu-open");
       menuToggle.setAttribute("aria-expanded", "false");
-      closeCommercialDropdowns();
+      closeNavDropdowns();
     }
   });
 }
@@ -146,22 +146,41 @@ function normalizePath(value) {
 }
 
 const currentPage = normalizePath(window.location.pathname);
-const commercialLinks = [
-  ["/commercial-cleaning-birmingham", "Commercial Cleaning"],
-  ["/office-cleaning-birmingham", "Office Cleaning"],
-  ["/communal-area-cleaning-birmingham", "Communal Area Cleaning"],
-  ["/retail-cleaning-birmingham", "Retail Cleaning"],
-  ["/commercial-deep-cleaning-birmingham", "Commercial Deep Cleaning"],
-  ["/healthcare-cleaning-birmingham", "Healthcare Cleaning"],
-  ["/school-cleaning-birmingham", "School Cleaning"],
-  ["/gym-cleaning-birmingham", "Gym Cleaning"],
-  ["/restaurant-cleaning-birmingham", "Restaurant Cleaning"],
-  ["/commercial-carpet-cleaning-birmingham", "Commercial Carpet Cleaning"],
-];
+const navDropdownLinkSets = {
+  services: [
+    ["/end-of-tenancy-cleaning-birmingham", "End of Tenancy Cleaning"],
+    ["/deep-cleaning-birmingham", "Deep Cleaning"],
+    ["/after-builders-cleaning-birmingham", "After Builders Cleaning"],
+    ["/carpet-cleaning-birmingham", "Carpet Cleaning"],
+    ["/airbnb-cleaning-birmingham", "Airbnb Turnover Cleaning"],
+  ],
+  commercial: [
+    ["/commercial-cleaning-birmingham", "Commercial Cleaning"],
+    ["/office-cleaning-birmingham", "Office Cleaning"],
+    ["/communal-area-cleaning-birmingham", "Communal Area Cleaning"],
+    ["/retail-cleaning-birmingham", "Retail Cleaning"],
+    ["/commercial-deep-cleaning-birmingham", "Commercial Deep Cleaning"],
+    ["/healthcare-cleaning-birmingham", "Healthcare Cleaning"],
+    ["/school-cleaning-birmingham", "School Cleaning"],
+    ["/gym-cleaning-birmingham", "Gym Cleaning"],
+    ["/restaurant-cleaning-birmingham", "Restaurant Cleaning"],
+    ["/commercial-carpet-cleaning-birmingham", "Commercial Carpet Cleaning"],
+  ],
+  more: [
+    ["/about", "About Us"],
+    ["/articles", "Cleaning Guides"],
+    ["/locations", "Locations"],
+    ["/contact", "Contact"],
+  ],
+};
 
 document.querySelectorAll(".nav-dropdown-menu").forEach((menu) => {
+  const linkSet = navDropdownLinkSets[menu.dataset.dropdownMenu];
+
+  if (!linkSet) return;
+
   menu.textContent = "";
-  commercialLinks.forEach(([href, label]) => {
+  linkSet.forEach(([href, label]) => {
     const link = document.createElement("a");
     link.href = href;
     link.textContent = label;
@@ -189,6 +208,12 @@ const commercialPages = new Set([
   "/restaurant-cleaning-birmingham",
   "/commercial-carpet-cleaning-birmingham",
 ]);
+const morePages = new Set([
+  "/about",
+  "/articles",
+  "/locations",
+  "/contact",
+]);
 document.querySelectorAll(".nav-links a").forEach((link) => {
   const url = new URL(link.getAttribute("href"), window.location.href);
   const href = normalizePath(url.pathname);
@@ -196,8 +221,9 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
   const hashMatches = hasHash && href === currentPage && url.hash === window.location.hash;
   const isServiceChild = !hasHash && href === "/services" && servicePages.has(currentPage);
   const isCommercialChild = !hasHash && href === "/commercial-cleaning-birmingham" && commercialPages.has(currentPage);
+  const isMoreChild = !hasHash && href === "/about" && morePages.has(currentPage);
 
-  if ((!hasHash && href === currentPage) || hashMatches || isServiceChild || isCommercialChild) {
+  if ((!hasHash && href === currentPage) || hashMatches || isServiceChild || isCommercialChild || isMoreChild) {
     link.classList.add("active");
     link.setAttribute("aria-current", "page");
   }

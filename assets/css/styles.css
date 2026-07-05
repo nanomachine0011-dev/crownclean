@@ -88,7 +88,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(14px, 2vw, 28px);
+  gap: clamp(12px, 1.7vw, 24px);
 }
 
 .brand {
@@ -140,7 +140,7 @@ button {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: auto;
+  margin-left: clamp(10px, 1.8vw, 28px);
 }
 
 .nav-dropdown {
@@ -178,6 +178,19 @@ button {
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow-lg);
+}
+
+.nav-dropdown-menu[data-dropdown-menu="services"] {
+  width: min(460px, calc(100vw - 32px));
+}
+
+.nav-dropdown-menu[data-dropdown-menu="commercial"] {
+  width: min(600px, calc(100vw - 32px));
+}
+
+.nav-dropdown-menu[data-dropdown-menu="more"] {
+  width: min(320px, calc(100vw - 32px));
+  grid-template-columns: 1fr;
 }
 
 .nav-dropdown-menu a {
@@ -234,9 +247,10 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1120px) {
   .nav-cta .phone-link {
     display: none;
   }
@@ -247,11 +261,11 @@ button {
   justify-content: center;
   align-items: center;
   gap: 18px;
-  min-height: 40px;
-  padding: 8px 24px;
+  min-height: 34px;
+  padding: 6px 24px;
   color: var(--white);
   background: linear-gradient(135deg, var(--blue-900), var(--blue-700));
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 900;
   box-shadow: 0 10px 26px rgba(4, 31, 79, 0.16);
 }
@@ -2869,16 +2883,15 @@ h3 {
   }
 
   .urgency-bar {
-    flex-direction: column;
-    gap: 3px;
-    min-height: 54px;
-    padding: 9px 16px;
+    gap: 0;
+    min-height: 42px;
+    padding: 7px 16px;
     text-align: center;
-    font-size: 0.84rem;
+    font-size: 0.78rem;
   }
 
   .nav-links {
-    inset: 136px 16px auto 16px;
+    inset: 124px 16px auto 16px;
   }
 
   h1 {
