@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Carpet cleaning with extraction equipment</title>
+  <desc id="desc">A clean carpet with extraction lines and a carpet cleaning machine.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#f0f9ff"/>
+      <stop offset="1" stop-color="#e0f2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" rx="34" fill="url(#bg)"/>
+  <path d="M76 140h488v204H76z" fill="#d9eefc"/>
+  <path d="M96 176h448M96 216h448M96 256h448M96 296h448" stroke="#b6d7ef" stroke-width="8" stroke-linecap="round"/>
+  <path d="M132 344c78-74 188-72 278 0" fill="none" stroke="#0ea5e9" stroke-width="16" stroke-linecap="round"/>
+  <path d="M380 142h78c32 0 58 26 58 58v64H380z" fill="#0b5ed7"/>
+  <path d="M410 100h72v52h-72z" fill="#041f4f"/>
+  <circle cx="420" cy="274" r="28" fill="#082f66"/>
+  <circle cx="420" cy="274" r="11" fill="#bfdbfe"/>
+  <path d="M316 252h91" stroke="#041f4f" stroke-width="16" stroke-linecap="round"/>
+  <path d="M282 298l48-46" stroke="#041f4f" stroke-width="12" stroke-linecap="round"/>
+  <path d="M120 118h112" stroke="#16a3ff" stroke-width="10" stroke-linecap="round"/>
+</svg>
