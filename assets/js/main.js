@@ -170,7 +170,7 @@ const navDropdownLinkSets = {
     ["/about", "About Us"],
     ["/articles", "Cleaning Guides"],
     ["/locations", "Locations"],
-    ["/contact", "Contact"],
+    ["/contact#quote-form", "Contact"],
   ],
 };
 
